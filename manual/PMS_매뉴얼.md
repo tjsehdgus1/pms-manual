@@ -137,3 +137,63 @@
 ![프로그램 등록 입력 화면](https://github.com/user-attachments/assets/741959cd-6bbe-4954-9b32-1adbcbc9188d)
 
 > ⚠️ 프로그램이 등록되어야 기업이 해당 공고로 과제를 신청할 수 있습니다.
+
+---
+
+# 공고 신청 (기업)
+
+**메뉴 경로:** 홈 > 사업공고 > 지원사업 공고
+
+---
+
+**1. 지원사업 공고 목록 진입**
+상단 메뉴 「사업공고」 → 「지원사업 공고」 클릭
+
+![지원사업 공고 목록 화면](https://github.com/user-attachments/assets/e54b14f5-78e9-4ca2-ac7c-9574968b7860)
+
+**2. 공고 상세 확인**
+신청할 공고 행 클릭 → 공고 상세 화면으로 이동
+
+![지원사업 공고 상세 화면](https://github.com/user-attachments/assets/e6da8cfa-4e0b-4357-b1ac-73b73f6d7f29)
+
+**3. 프로그램 신청**
+공고 상세 화면에서 신청할 프로그램의 「신청」 버튼 클릭
+
+![프로그램 신청 버튼](https://github.com/user-attachments/assets/73d41bcc-ca7c-4cf5-a383-ab79471c737e)
+
+> ⚠️ 접수기간 내에만 신청 버튼이 활성화됩니다. 로그인 후 마이페이지 사업공고접수 메뉴로 이동합니다.
+
+**4. Step 1 – 프로그램정보 확인**
+사업공고명·프로그램명·지원분야·총사업비 등 신청 정보 확인 (읽기 전용)
+
+![프로그램정보 화면](https://github.com/user-attachments/assets/9d70fe04-0cad-456e-bfb6-b9b46b6aed1f)
+
+**5. Step 2 – 기업정보 입력**
+임직원 현황·재무정보(3개년)·사업자등록증 등 입력 후 「저장」
+
+![기업정보 입력 화면](https://github.com/user-attachments/assets/30f81885-1219-48cf-b1ab-0a5d0c5ded1e)
+
+> ⚠️ ★ 표시 항목은 필수입니다.
+
+**6. Step 3 – 적격성진단표 작성**
+항목별 Y / N 선택 후 「저장」
+
+![적격성진단표 화면](https://github.com/user-attachments/assets/17d79f6b-86a5-4c88-b5bc-7a511aea5c79)
+
+> ⚠️ 모든 항목에 응답해야 저장됩니다.
+
+**7. Step 4 – 컨소시엄 (해당 시)**
+단독 신청인 경우 건너뜁니다. 컨소시엄 신청 시 「기업(기관) 추가」 클릭 → 팝업에서 검색 후 선택
+
+![컨소시엄 화면](https://github.com/user-attachments/assets/b8d26abe-9b2f-4728-bdbf-b7082d0d36c0)
+
+![기업(기관) 추가 팝업](https://github.com/user-attachments/assets/72763d97-5df3-4760-a3aa-ce595aed6379)
+
+> ⚠️ 참여기관 담당자가 직접 로그인하여 기업정보 입력 후 참여완료 처리해야 합니다.
+
+**8. Step 5 – 사업정보 입력**
+과제명·연구기간·예산·사업계획서 파일 입력 후 「저장」
+
+![사업정보 입력 화면](https://github.com/user-attachments/assets/b6f616e3-7397-4d51-8564-f6ddb9b69a95)
+
+> ⚠️ 사업계획서 파일은 최대 100MB. 모든 단계 완료 후 **신청완료** 버튼을 클릭해야 최종 접수됩니다.
