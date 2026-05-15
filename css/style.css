@@ -293,6 +293,17 @@ p { margin-bottom: 12px; }
 }
 .box-tip .box-title { font-weight: 700; margin-bottom: 4px; }
 
+/* ===== Menu Path ===== */
+.menu-path {
+  background: var(--accent);
+  border-left: 3px solid var(--navy);
+  padding: 8px 14px;
+  border-radius: 0 6px 6px 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
 /* ===== Screen Capture Placeholder ===== */
 .capture-box {
   border: 2px dashed #9ca3af;

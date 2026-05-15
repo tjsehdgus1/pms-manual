@@ -9,15 +9,14 @@ const NAV = [
     ]
   },
   {
-    title: '사업 관리',
+    title: '사업등록관리',
     items: [
       {
-        label: '01. 사업관리',
+        label: '01. 사업관리 / 프로젝트 관리',
         href: '01_사업관리.html',
         sub: [
-          { label: '1-1. 사업 등록', href: '01_사업관리.html#s1-1' },
-          { label: '1-2. 사업 조회/수정', href: '01_사업관리.html#s1-2' },
-          { label: '1-3. 사업 승인', href: '01_사업관리.html#s1-3' },
+          { label: '사업관리',      href: '01_사업관리.html#s-사업관리' },
+          { label: '프로젝트 관리', href: '01_사업관리.html#s-프로젝트관리' },
         ]
       },
     ]
