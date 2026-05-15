@@ -30,6 +30,20 @@ const NAV = [
           { label: '프로그램 등록',     href: '02_지원사업공고.html#s-프로그램등록' },
         ]
       },
+      {
+        label: '03. 공고 신청 (기업)',
+        href: '03_공고신청_기업.html',
+        sub: [
+          { label: '공고 목록 진입',    href: '03_공고신청_기업.html#s-공고목록' },
+          { label: '공고 상세 확인',    href: '03_공고신청_기업.html#s-공고상세' },
+          { label: '프로그램 신청',     href: '03_공고신청_기업.html#s-프로그램신청' },
+          { label: 'Step1 프로그램정보', href: '03_공고신청_기업.html#s-프로그램정보' },
+          { label: 'Step2 기업정보',    href: '03_공고신청_기업.html#s-기업정보' },
+          { label: 'Step3 적격성진단',  href: '03_공고신청_기업.html#s-적격성진단' },
+          { label: 'Step4 컨소시엄',    href: '03_공고신청_기업.html#s-컨소시엄' },
+          { label: 'Step5 사업정보',    href: '03_공고신청_기업.html#s-사업정보' },
+        ]
+      },
     ]
   },
 ];
