@@ -139,10 +139,47 @@ function slugify(str) {
   return str.replace(/[^a-zA-Z0-9가-힣]/g, '-');
 }
 
+/* ── Lightbox ─────────────────────────────────────────────────── */
+function initLightbox() {
+  // 라이트박스 DOM 생성
+  const box = document.createElement('div');
+  box.id = 'lightbox';
+  box.innerHTML = '<button id="lightbox-close" aria-label="닫기">&times;</button><img id="lightbox-img" src="" alt="">';
+  document.body.appendChild(box);
+
+  const img = box.querySelector('#lightbox-img');
+
+  function open(src, alt) {
+    img.src = src;
+    img.alt = alt || '';
+    box.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    box.classList.remove('open');
+    document.body.style.overflow = '';
+    img.src = '';
+  }
+
+  // 본문 이미지 클릭 시 열기
+  document.querySelectorAll('#content img').forEach(el => {
+    el.addEventListener('click', () => open(el.src, el.alt));
+  });
+
+  // 배경·닫기 버튼 클릭 시 닫기
+  box.addEventListener('click', e => { if (e.target === box) close(); });
+  box.querySelector('#lightbox-close').addEventListener('click', close);
+
+  // ESC 키로 닫기
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+}
+
 /* ── Init ─────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   buildNav('nav-list');
   initSearch('nav-search', 'nav-list');
   initHamburger('hamburger', 'sidebar');
   initScrollSpy();
+  initLightbox();
 });
