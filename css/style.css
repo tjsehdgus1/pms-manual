@@ -345,6 +345,60 @@ td {
 }
 tr:nth-child(even) td { background: var(--accent); }
 
+/* ===== Content Images ===== */
+#content img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin: 16px 0;
+  cursor: zoom-in;
+  transition: box-shadow 0.2s;
+  display: block;
+}
+#content img:hover {
+  box-shadow: 0 4px 20px rgba(27,58,107,0.2);
+}
+
+/* ===== Lightbox ===== */
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  cursor: zoom-out;
+}
+#lightbox.open {
+  display: flex;
+}
+#lightbox img {
+  max-width: 92vw;
+  max-height: 92vh;
+  border-radius: 6px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  cursor: default;
+  object-fit: contain;
+  border: none;
+  margin: 0;
+}
+#lightbox-close {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.8;
+  background: none;
+  border: none;
+  padding: 4px 8px;
+}
+#lightbox-close:hover { opacity: 1; }
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   #hamburger { display: block; }
