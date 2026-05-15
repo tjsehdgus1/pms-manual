@@ -21,20 +21,6 @@ const NAV = [
       },
     ]
   },
-  {
-    title: '과제 관리',
-    items: [
-      { label: '02. 과제관리', href: '02_과제관리.html' },
-      { label: '03. 협약관리', href: '03_협약관리.html' },
-    ]
-  },
-  {
-    title: '정산/보고',
-    items: [
-      { label: '04. 정산관리', href: '04_정산관리.html' },
-      { label: '05. 보고서관리', href: '05_보고서관리.html' },
-    ]
-  },
 ];
 
 /* ── Build sidebar HTML ───────────────────────────────────────── */
