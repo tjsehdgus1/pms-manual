@@ -201,6 +201,6 @@
 **9. 접수완료**
 모든 단계 작성 완료 후 「프로그램정보」 탭으로 이동 → 「접수완료」 버튼 클릭
 
-![프로그램정보 – 접수완료 화면](https://github.com/user-attachments/assets/9d70fe04-0cad-456e-bfb6-b9b46b6aed1f)
+![프로그램정보 – 접수완료 화면](https://github.com/user-attachments/assets/a6c9f21d-5b51-4d78-8fc0-e480ffd6d6d1)
 
 > ⚠️ **접수완료** 버튼을 클릭해야 최종 접수됩니다. 접수 후에는 내용 수정이 불가합니다.
