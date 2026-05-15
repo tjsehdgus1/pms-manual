@@ -42,6 +42,7 @@ const NAV = [
           { label: 'Step3 적격성진단',  href: '03_공고신청_기업.html#s-적격성진단' },
           { label: 'Step4 컨소시엄',    href: '03_공고신청_기업.html#s-컨소시엄' },
           { label: 'Step5 사업정보',    href: '03_공고신청_기업.html#s-사업정보' },
+          { label: '접수완료',          href: '03_공고신청_기업.html#s-접수완료' },
         ]
       },
     ]
