@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01. 사업관리 – PMS 매뉴얼</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+  <button id="hamburger" aria-label="메뉴">☰</button>
+  <div class="logo">
+    전남테크노파크
+    <span>│ PMS 사용자 매뉴얼</span>
+  </div>
+</header>
+
+<div id="app">
+
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <div class="sidebar-search">
+      <input id="nav-search" type="search" placeholder="메뉴 검색…" aria-label="메뉴 검색">
+    </div>
+    <div id="nav-list"></div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="content">
+
+    <div class="section-header">
+      <div class="breadcrumb">
+        <a href="../index.html" style="color:inherit;text-decoration:none;">전체 목차</a>
+        &nbsp;›&nbsp; 사업관리
+      </div>
+      <h1>01. 사업관리</h1>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <h2 id="s1-1">1-1. 사업 등록</h2>
+
+    <p>신규 사업을 시스템에 등록하는 절차입니다.
+       메인 메뉴에서 <span class="btn-name">「사업관리」</span> →
+       <span class="btn-name">「사업 등록」</span> 을 클릭합니다.</p>
+
+    <div class="capture-box">
+      <div class="cap-icon">🖼</div>
+      <div class="cap-label">[화면 캡처 : 사업 등록 화면]</div>
+      <div class="cap-desc">사업 등록 폼 전체 화면</div>
+    </div>
+
+    <h3>입력 항목</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th>필수</th>
+          <th>설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>사업명</td><td>●</td><td>사업의 공식 명칭을 입력합니다.</td></tr>
+        <tr><td>사업 기간</td><td>●</td><td>시작일 ~ 종료일을 선택합니다.</td></tr>
+        <tr><td>총 사업비</td><td>●</td><td>정부지원금 + 민간부담금 합계를 입력합니다.</td></tr>
+        <tr><td>사업 유형</td><td>●</td><td>일반 / R&amp;D / 인프라 중 선택합니다.</td></tr>
+        <tr><td>담당자</td><td>○</td><td>사업 담당 직원을 검색하여 지정합니다.</td></tr>
+        <tr><td>비고</td><td>○</td><td>특이사항을 자유롭게 입력합니다.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>등록 절차</h3>
+    <ol class="steps">
+      <li>상단 메뉴 <span class="btn-name">「사업관리」</span> 클릭</li>
+      <li>좌측 메뉴 <span class="btn-name">「사업 등록」</span> 클릭</li>
+      <li>각 항목 입력 후 <span class="btn-name">「저장」</span> 클릭</li>
+      <li>저장 완료 알림 확인 → 사업 목록으로 자동 이동</li>
+    </ol>
+
+    <div class="box box-warn">
+      <div class="box-title">⚠️ 주의사항</div>
+      총 사업비는 실제 협약금액과 일치해야 합니다. 잘못 입력한 경우
+      <span class="btn-name">「사업 수정」</span> 메뉴에서 담당자 승인 후 변경할 수 있습니다.
+    </div>
+
+    <div class="capture-box">
+      <div class="cap-icon">🖼</div>
+      <div class="cap-label">[화면 캡처 : 사업 등록 완료 화면]</div>
+      <div class="cap-desc">저장 성공 메시지 및 사업 목록 리다이렉트</div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <h2 id="s1-2">1-2. 사업 조회 / 수정</h2>
+
+    <p>등록된 사업을 조회하고 내용을 수정하는 방법입니다.
+       <span class="btn-name">「사업관리」</span> → <span class="btn-name">「사업 목록」</span>
+       에서 해당 사업을 클릭하면 상세 화면으로 이동합니다.</p>
+
+    <div class="capture-box">
+      <div class="cap-icon">🖼</div>
+      <div class="cap-label">[화면 캡처 : 사업 목록 화면]</div>
+      <div class="cap-desc">검색 필터 및 목록 테이블</div>
+    </div>
+
+    <h3>검색 필터 사용법</h3>
+    <ol class="steps">
+      <li>사업명, 기간, 상태 등 원하는 조건 입력</li>
+      <li><span class="btn-name">「검색」</span> 버튼 클릭</li>
+      <li>결과 목록에서 사업명 클릭 → 상세 화면 이동</li>
+      <li>수정이 필요하면 <span class="btn-name">「수정」</span> 버튼 클릭</li>
+      <li>내용 변경 후 <span class="btn-name">「저장」</span> 클릭</li>
+    </ol>
+
+    <div class="box box-warn">
+      <div class="box-title">⚠️ 주의사항</div>
+      승인 완료된 사업은 일부 항목(총 사업비, 사업 기간 등)이 잠금 처리됩니다.
+      변경이 필요한 경우 관리자에게 잠금 해제를 요청하세요.
+    </div>
+
+    <div class="box box-tip">
+      <div class="box-title">💡 참고</div>
+      목록 우측 상단의 <span class="ui-label">Excel 다운로드</span> 기능으로
+      검색된 사업 목록 전체를 엑셀 파일로 내보낼 수 있습니다.
+    </div>
+
+    <div class="capture-box">
+      <div class="cap-icon">🖼</div>
+      <div class="cap-label">[화면 캡처 : 사업 상세 수정 화면]</div>
+      <div class="cap-desc">수정 모드 활성화 상태</div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <h2 id="s1-3">1-3. 사업 승인</h2>
+
+    <p>담당자가 등록한 사업을 관리자가 최종 승인하는 절차입니다.
+       승인 권한이 있는 계정으로 로그인한 후
+       <span class="btn-name">「사업관리」</span> → <span class="btn-name">「승인 대기」</span>
+       메뉴로 이동합니다.</p>
+
+    <div class="capture-box">
+      <div class="cap-icon">🖼</div>
+      <div class="cap-label">[화면 캡처 : 승인 대기 목록 화면]</div>
+      <div class="cap-desc">승인 대기 사업 리스트</div>
+    </div>
+
+    <h3>승인 처리 절차</h3>
+    <ol class="steps">
+      <li><span class="btn-name">「승인 대기」</span> 목록에서 대상 사업 선택</li>
+      <li>사업 정보 검토 (첨부파일 포함)</li>
+      <li><span class="btn-name">「승인」</span> 또는 <span class="btn-name">「반려」</span> 클릭</li>
+      <li>반려 시 반려 사유를 필수로 입력한 후 <span class="btn-name">「확인」</span></li>
+      <li>승인 완료 시 담당자에게 알림 메일 자동 발송</li>
+    </ol>
+
+    <div class="box box-warn">
+      <div class="box-title">⚠️ 주의사항</div>
+      승인 후에는 되돌릴 수 없습니다. 검토가 불충분한 경우
+      <span class="btn-name">「반려」</span> 처리 후 담당자에게 재제출을 요청하세요.
+    </div>
+
+    <div class="capture-box">
+      <div class="cap-icon">🖼</div>
+      <div class="cap-label">[화면 캡처 : 승인 완료 화면]</div>
+      <div class="cap-desc">승인 완료 후 상태 변경 확인</div>
+    </div>
+
+  </main>
+</div>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
