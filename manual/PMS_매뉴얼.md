@@ -285,3 +285,37 @@
 ![보완요청 확인 및 답변 화면](https://github.com/user-attachments/assets/cf71e182-df90-48fd-bb2b-e1778ae26c6a)
 
 > ⚠️ 답변 제출 후에는 내용 수정이 불가합니다. 관리자가 답변을 검토 후 처리합니다.
+
+---
+
+# 보완요청 답변 검토
+
+**메뉴 경로:** 관리자 > 과제관리 > 공고접수내역
+
+---
+
+**1. 공고접수내역 목록 진입**
+왼쪽 메뉴 「과제관리」 → 「공고접수내역」 클릭
+
+![공고목록 화면](https://github.com/user-attachments/assets/b29396da-c28d-4ab9-9aee-2ffc606eff2e)
+
+공고 행 클릭 → 접수목록에서 해당 신청서 행 클릭
+
+![접수목록 화면](https://github.com/user-attachments/assets/525f9a71-bc35-48d1-88a8-7982d9178804)
+
+**2. 요건검토 탭 확인**
+접수 상세 화면에서 「요건검토」 탭 클릭 → 기업 보완 답변 제출 여부 확인
+
+![요건검토 탭 화면](https://github.com/user-attachments/assets/f714b4c7-8cab-4ba7-ad01-8ac09482503e)
+
+**3. 보완요청 답변 확인**
+기업이 제출한 보완 답변 내용을 검토합니다.
+
+![보완요청 답변 확인 화면](https://github.com/user-attachments/assets/11304710-b342-4900-9f45-4efe5e9c9ebf)
+
+**4. 검토완료 또는 서류탈락 처리**
+검토 결과에 따라 「검토완료」 또는 「서류탈락」 버튼 클릭
+
+![검토완료 또는 서류탈락 화면](https://github.com/user-attachments/assets/05ce177c-1e27-485f-9b90-45a69660b37e)
+
+> ⚠️ **검토완료** 처리 시 선정평가 단계로 진행됩니다. **서류탈락** 처리 시 해당 신청은 최종 탈락 처리됩니다.
