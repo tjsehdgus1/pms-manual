@@ -12,7 +12,7 @@ const NAV = [
     title: '섹션 목록',
     items: [
       {
-        label: '01. 사업관리 / 프로젝트 관리',
+        label: '01. 사업관리 / 프로젝트 관리 (관리자)',
         href: '01_사업관리.html',
         sub: [
           { label: '사업관리',      href: '01_사업관리.html#s-사업관리' },
@@ -20,7 +20,7 @@ const NAV = [
         ]
       },
       {
-        label: '02. 지원사업공고',
+        label: '02. 지원사업공고 (관리자)',
         href: '02_지원사업공고.html',
         sub: [
           { label: '목록 진입',         href: '02_지원사업공고.html#s-목록' },
