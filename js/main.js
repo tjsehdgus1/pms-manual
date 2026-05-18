@@ -223,7 +223,7 @@ const IMG_OVERRIDE_KEY = 'pms-img-overrides';
 
 /* 관리자 비밀 문구: 라이트박스가 열린 상태에서 이 단어를 그대로 타이핑하면
    이미지 경로 수정 창이 열립니다. 값만 바꾸면 비밀 문구가 변경됩니다. */
-const ADMIN_PASS = 'edit';
+const ADMIN_PASS = 'pms';
 
 function loadOverrides() {
   try { return JSON.parse(localStorage.getItem(IMG_OVERRIDE_KEY)) || {}; }
