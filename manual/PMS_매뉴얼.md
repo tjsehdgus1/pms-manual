@@ -319,3 +319,46 @@
 ![검토완료 또는 서류탈락 화면](https://github.com/user-attachments/assets/05ce177c-1e27-485f-9b90-45a69660b37e)
 
 > ⚠️ **검토완료** 처리 시 선정평가 단계로 진행됩니다. **서류탈락** 처리 시 해당 신청은 최종 탈락 처리됩니다.
+
+---
+
+# 선정평가 등록
+
+**메뉴 경로:** 관리자 > 과제관리 > 평가관리 > 평가등록
+
+---
+
+**1. 평가등록 공고 목록 진입**
+왼쪽 메뉴 「과제관리」 → 「평가관리」 → 「평가등록」 클릭 → 해당 공고 행 클릭
+
+![평가등록 공고목록 화면](https://github.com/user-attachments/assets/b21a6c70-156b-403a-9297-6b78ef132c8e)
+
+**2. 프로그램 / 평가표 관리**
+평가 대상 프로그램 목록 및 평가표 연결 현황을 확인합니다.
+
+![프로그램/평가표 관리 화면](https://github.com/user-attachments/assets/d6707178-65b2-45e1-92de-7cc01f1acab9)
+
+**3. 평가표 수정 (선정평가)**
+평가 항목·배점을 확인하고 필요 시 수정합니다.
+
+![평가표 수정 화면](https://github.com/user-attachments/assets/269bfd2d-8be1-4d87-a826-de0212a6fce3)
+
+「평가표양식 가져오기」 클릭 → 기존 양식 선택 후 적용
+
+![평가표양식 가져오기 화면](https://github.com/user-attachments/assets/1cda5c7f-8803-4c6a-be2d-1c30ad5923ef)
+
+**4. 평가분과 추가**
+「평가분과 추가」 클릭 → 분과명·평가일정 입력 후 저장
+
+![평가분과 추가 화면](https://github.com/user-attachments/assets/c9eae7dc-f5f8-42f6-9f17-72258f1c2adb)
+
+「평가위원 추가」 클릭 → 팝업에서 위원 검색 후 선택
+
+![평가위원 추가 화면](https://github.com/user-attachments/assets/3493ef68-d84e-491f-9bef-ddcdfbad22ab)
+
+**5. 평가기업 매칭**
+분과별 평가 대상 기업을 배정합니다. 「매칭」 버튼 클릭 → 기업 선택 후 저장
+
+![평가기업 매칭 화면](https://github.com/user-attachments/assets/84fb2290-1057-47f9-9df1-ce10af3e5292)
+
+> ⚠️ 평가기업 매칭 완료 후 평가위원에게 평가 진행 안내가 발송됩니다.
