@@ -204,25 +204,101 @@ function slugify(str) {
 function initLightbox() {
   const box = document.createElement('div');
   box.id = 'lightbox';
-  box.innerHTML = '<button id="lightbox-close" aria-label="닫기">&times;</button><img id="lightbox-img" src="" alt="">';
+  box.innerHTML = `
+    <button id="lightbox-close" aria-label="닫기">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+    <div id="lightbox-guide">🔍 휠: 확대/축소 &nbsp;·&nbsp; 더블클릭: 2.5배 확대 &nbsp;·&nbsp; 드래그: 이동 &nbsp;·&nbsp; ESC: 닫기</div>
+  `;
   document.body.appendChild(box);
 
-  const lightboxImg = box.querySelector('#lightbox-img');
+  const img = box.querySelector('#lightbox-img');
+  const guide = box.querySelector('#lightbox-guide');
+
+  let scale = 1, tx = 0, ty = 0;
+  let dragging = false, dragX = 0, dragY = 0;
+  let guideTimer = null;
+
+  function applyTransform() {
+    img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    img.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+  }
+
+  function resetTransform() {
+    scale = 1; tx = 0; ty = 0;
+    applyTransform();
+  }
 
   function open(src, alt) {
-    lightboxImg.src = src;
-    lightboxImg.alt = alt || '';
+    img.src = src;
+    img.alt = alt || '';
+    resetTransform();
     box.classList.add('open');
     document.body.style.overflow = 'hidden';
+    guide.classList.add('visible');
+    clearTimeout(guideTimer);
+    guideTimer = setTimeout(() => guide.classList.remove('visible'), 2500);
   }
 
   function close() {
     box.classList.remove('open');
     document.body.style.overflow = '';
-    lightboxImg.src = '';
+    img.src = '';
+    resetTransform();
   }
 
-  // 이벤트 위임: #content 내 모든 img 클릭 처리
+  /* 휠 줌 — 커서 위치 기준 */
+  box.addEventListener('wheel', e => {
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.15 : 1 / 1.15;
+    const newScale = Math.min(Math.max(scale * factor, 1), 6);
+    const rect = img.getBoundingClientRect();
+    const dx = e.clientX - (rect.left + rect.width / 2);
+    const dy = e.clientY - (rect.top + rect.height / 2);
+    tx += dx * (1 - newScale / scale);
+    ty += dy * (1 - newScale / scale);
+    scale = newScale;
+    if (scale <= 1) { scale = 1; tx = 0; ty = 0; }
+    applyTransform();
+  }, { passive: false });
+
+  /* 더블클릭 — 클릭 지점 2.5배 / 원복 */
+  img.addEventListener('dblclick', e => {
+    e.stopPropagation();
+    if (scale > 1) {
+      scale = 1; tx = 0; ty = 0;
+    } else {
+      const rect = img.getBoundingClientRect();
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
+      const newScale = 2.5;
+      tx += dx * (1 - newScale / scale);
+      ty += dy * (1 - newScale / scale);
+      scale = newScale;
+    }
+    applyTransform();
+  });
+
+  /* 드래그 패닝 */
+  img.addEventListener('mousedown', e => {
+    if (scale <= 1) return;
+    e.preventDefault();
+    dragging = true;
+    dragX = e.clientX - tx;
+    dragY = e.clientY - ty;
+    img.style.cursor = 'grabbing';
+  });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    tx = e.clientX - dragX;
+    ty = e.clientY - dragY;
+    img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+  });
+  document.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    img.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+  });
+
   const content = document.querySelector('#content');
   if (content) {
     content.addEventListener('click', e => {
