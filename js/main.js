@@ -9,7 +9,7 @@ const NAV = [
     ]
   },
   {
-    title: '관리자',
+    title: '섹션 목록',
     items: [
       {
         label: '01. 사업관리 / 프로젝트 관리',
@@ -30,11 +30,6 @@ const NAV = [
           { label: '프로그램 등록',     href: '02_지원사업공고.html#s-프로그램등록' },
         ]
       },
-    ]
-  },
-  {
-    title: '기업',
-    items: [
       {
         label: '03. 공고 신청 (기업)',
         href: '03_공고신청_기업.html',
