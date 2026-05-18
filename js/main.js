@@ -218,6 +218,28 @@ function slugify(str) {
   return str.replace(/[^a-zA-Z0-9가-힣]/g, '-');
 }
 
+/* ── Image path overrides (admin) ─────────────────────────────── */
+const IMG_OVERRIDE_KEY = 'pms-img-overrides';
+
+function loadOverrides() {
+  try { return JSON.parse(localStorage.getItem(IMG_OVERRIDE_KEY)) || {}; }
+  catch { return {}; }
+}
+
+function saveOverrides(map) {
+  localStorage.setItem(IMG_OVERRIDE_KEY, JSON.stringify(map));
+}
+
+/* 원본 src 기록 + 저장된 변경분 적용 */
+function applyImgOverrides() {
+  const map = loadOverrides();
+  document.querySelectorAll('#content img').forEach(img => {
+    if (!img.dataset.origSrc) img.dataset.origSrc = img.getAttribute('src') || '';
+    const o = map[img.dataset.origSrc];
+    if (o) img.src = o;
+  });
+}
+
 /* ── Lightbox ─────────────────────────────────────────────────── */
 function initLightbox() {
   const box = document.createElement('div');
@@ -231,6 +253,9 @@ function initLightbox() {
 
   const img = box.querySelector('#lightbox-img');
   const guide = box.querySelector('#lightbox-guide');
+
+  /* 현재 라이트박스에 띄운 본문 이미지 요소 */
+  let triggerImg = null;
 
   let scale = 1, tx = 0, ty = 0;
   let dragging = false, dragX = 0, dragY = 0;
@@ -322,6 +347,7 @@ function initLightbox() {
     content.addEventListener('click', e => {
       if (e.target.tagName === 'IMG') {
         e.stopPropagation();
+        triggerImg = e.target;
         open(e.target.src, e.target.alt);
       }
     });
@@ -329,7 +355,101 @@ function initLightbox() {
 
   box.addEventListener('click', e => { if (e.target === box) close(); });
   box.querySelector('#lightbox-close').addEventListener('click', close);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+  /* ── 관리자 전용 이미지 경로 편집기 ──────────────────────────── */
+  const editor = document.createElement('div');
+  editor.id = 'img-editor';
+  editor.innerHTML = `
+    <div class="ie-panel" role="dialog" aria-modal="true" aria-label="이미지 경로 수정">
+      <h3>이미지 경로 수정 <span class="ie-admin">관리자</span></h3>
+      <label for="ie-input">이미지 URL / 경로</label>
+      <textarea id="ie-input" rows="3" spellcheck="false"></textarea>
+      <div class="ie-preview-wrap"><img id="ie-preview" alt="미리보기"></div>
+      <div class="ie-actions">
+        <button type="button" id="ie-copy" class="ie-btn ie-ghost">&lt;img&gt; 코드 복사</button>
+        <button type="button" id="ie-reset" class="ie-btn ie-ghost">원본 복원</button>
+        <span class="ie-spacer"></span>
+        <button type="button" id="ie-cancel" class="ie-btn ie-ghost">취소</button>
+        <button type="button" id="ie-save" class="ie-btn ie-primary">적용</button>
+      </div>
+      <p class="ie-note">변경 사항은 이 브라우저에 저장됩니다. 영구 반영하려면 「&lt;img&gt; 코드 복사」로 HTML 소스의 src를 교체하세요.</p>
+    </div>
+  `;
+  document.body.appendChild(editor);
+
+  const ieInput   = editor.querySelector('#ie-input');
+  const iePreview = editor.querySelector('#ie-preview');
+
+  function openEditor() {
+    if (!triggerImg) return;
+    ieInput.value = triggerImg.getAttribute('src') || '';
+    iePreview.src = ieInput.value;
+    editor.classList.add('open');
+    ieInput.focus();
+    ieInput.select();
+  }
+
+  function closeEditor() { editor.classList.remove('open'); }
+
+  ieInput.addEventListener('input', () => { iePreview.src = ieInput.value.trim(); });
+
+  editor.querySelector('#ie-save').addEventListener('click', () => {
+    if (!triggerImg) return;
+    const newSrc = ieInput.value.trim();
+    if (!newSrc) return;
+    const orig = triggerImg.dataset.origSrc || triggerImg.getAttribute('src');
+    const map = loadOverrides();
+    map[orig] = newSrc;
+    saveOverrides(map);
+    triggerImg.src = newSrc;
+    img.src = newSrc;
+    closeEditor();
+  });
+
+  editor.querySelector('#ie-reset').addEventListener('click', () => {
+    if (!triggerImg) return;
+    const orig = triggerImg.dataset.origSrc || triggerImg.getAttribute('src');
+    const map = loadOverrides();
+    delete map[orig];
+    saveOverrides(map);
+    triggerImg.src = orig;
+    img.src = orig;
+    ieInput.value = orig;
+    iePreview.src = orig;
+  });
+
+  editor.querySelector('#ie-copy').addEventListener('click', async () => {
+    const src = ieInput.value.trim();
+    const alt = (triggerImg && triggerImg.alt) || '';
+    const snippet = `<img src="${src}" alt="${alt}" style="width:100%;border-radius:8px;border:1px solid #d0d5dd;margin:16px 0;">`;
+    try {
+      await navigator.clipboard.writeText(snippet);
+      const b = editor.querySelector('#ie-copy');
+      const t = b.textContent;
+      b.textContent = '복사됨 ✓';
+      setTimeout(() => { b.textContent = t; }, 1500);
+    } catch {
+      window.prompt('복사할 코드:', snippet);
+    }
+  });
+
+  editor.querySelector('#ie-cancel').addEventListener('click', closeEditor);
+  editor.addEventListener('click', e => { if (e.target === editor) closeEditor(); });
+
+  document.addEventListener('keydown', e => {
+    if (editor.classList.contains('open')) {
+      if (e.key === 'Escape') { e.stopPropagation(); closeEditor(); }
+      return;
+    }
+    /* 관리자 전용 단축키: 라이트박스가 열린 상태에서 Ctrl+Alt+E */
+    if (box.classList.contains('open') && e.ctrlKey && e.altKey &&
+        (e.key === 'e' || e.key === 'E')) {
+      e.preventDefault();
+      openEditor();
+      return;
+    }
+    if (e.key === 'Escape') close();
+  });
 }
 
 /* ── Init ─────────────────────────────────────────────────────── */
@@ -338,5 +458,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch('nav-search', 'nav-list');
   initHamburger('hamburger', 'sidebar');
   initScrollSpy();
+  applyImgOverrides();
   initLightbox();
 });
