@@ -379,11 +379,31 @@ tr:nth-child(even) td { background: var(--accent); }
   max-height: 92vh;
   border-radius: 6px;
   box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-  cursor: default;
+  cursor: zoom-in;
   object-fit: contain;
   border: none;
   margin: 0;
+  transform-origin: center center;
+  will-change: transform;
 }
+#lightbox-guide {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 1001;
+  letter-spacing: 0.2px;
+}
+#lightbox-guide.visible { opacity: 1; }
 #lightbox-close {
   position: fixed;
   top: 16px;
