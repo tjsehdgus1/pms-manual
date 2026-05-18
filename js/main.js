@@ -221,6 +221,10 @@ function slugify(str) {
 /* ── Image path overrides (admin) ─────────────────────────────── */
 const IMG_OVERRIDE_KEY = 'pms-img-overrides';
 
+/* 관리자 비밀 문구: 라이트박스가 열린 상태에서 이 단어를 그대로 타이핑하면
+   이미지 경로 수정 창이 열립니다. 값만 바꾸면 비밀 문구가 변경됩니다. */
+const ADMIN_PASS = 'pmsadmin';
+
 function loadOverrides() {
   try { return JSON.parse(localStorage.getItem(IMG_OVERRIDE_KEY)) || {}; }
   catch { return {}; }
@@ -260,6 +264,8 @@ function initLightbox() {
   let scale = 1, tx = 0, ty = 0;
   let dragging = false, dragX = 0, dragY = 0;
   let guideTimer = null;
+  /* 관리자 비밀 문구 입력 버퍼 (라이트박스 열린 동안 타이핑 추적) */
+  let passBuffer = '';
 
   function applyTransform() {
     img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
@@ -274,6 +280,7 @@ function initLightbox() {
   function open(src, alt) {
     img.src = src;
     img.alt = alt || '';
+    passBuffer = '';
     resetTransform();
     box.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -286,6 +293,7 @@ function initLightbox() {
     box.classList.remove('open');
     document.body.style.overflow = '';
     img.src = '';
+    passBuffer = '';
     resetTransform();
   }
 
@@ -441,11 +449,16 @@ function initLightbox() {
       if (e.key === 'Escape') { e.stopPropagation(); closeEditor(); }
       return;
     }
-    /* 관리자 전용 단축키: 라이트박스가 열린 상태에서 Ctrl+Alt+E */
-    if (box.classList.contains('open') && e.ctrlKey && e.altKey &&
-        (e.key === 'e' || e.key === 'E')) {
-      e.preventDefault();
-      openEditor();
+    if (box.classList.contains('open')) {
+      if (e.key === 'Escape') { close(); return; }
+      /* 한 글자 키만 버퍼에 누적 → 비밀 문구와 끝부분이 일치하면 열기 */
+      if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        passBuffer = (passBuffer + e.key).toLowerCase().slice(-ADMIN_PASS.length);
+        if (passBuffer === ADMIN_PASS.toLowerCase()) {
+          passBuffer = '';
+          openEditor();
+        }
+      }
       return;
     }
     if (e.key === 'Escape') close();
