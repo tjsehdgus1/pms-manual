@@ -14,6 +14,7 @@ const NAV = [
       {
         label: '01. 사업관리 / 프로젝트 관리 (관리자)',
         href: '01_사업관리.html',
+        role: 'admin',
         sub: [
           { label: '사업관리',      href: '01_사업관리.html#s-사업관리' },
           { label: '프로젝트 관리', href: '01_사업관리.html#s-프로젝트관리' },
@@ -22,6 +23,7 @@ const NAV = [
       {
         label: '02. 지원사업공고 (관리자)',
         href: '02_지원사업공고.html',
+        role: 'admin',
         sub: [
           { label: '목록 진입',         href: '02_지원사업공고.html#s-목록' },
           { label: '프로젝트 선택',     href: '02_지원사업공고.html#s-프로젝트선택' },
@@ -31,8 +33,9 @@ const NAV = [
         ]
       },
       {
-        label: '03. 공고 신청 (기업)',
+        label: '03. 공고 신청 (사용자)',
         href: '03_공고신청_기업.html',
+        role: 'user',
         sub: [
           { label: '공고 목록 진입',    href: '03_공고신청_기업.html#s-공고목록' },
           { label: '공고 상세 확인',    href: '03_공고신청_기업.html#s-공고상세' },
@@ -48,6 +51,7 @@ const NAV = [
       {
         label: '04. 요건검토 / 보완요청 (관리자)',
         href: '04_요건검토_보완요청.html',
+        role: 'admin',
         sub: [
           { label: '접수내역 목록 진입',  href: '04_요건검토_보완요청.html#s-목록' },
           { label: '프로그램정보 확인',   href: '04_요건검토_보완요청.html#s-프로그램정보' },
@@ -60,8 +64,9 @@ const NAV = [
         ]
       },
       {
-        label: '05. 보완요청 답변 (기업)',
+        label: '05. 보완요청 답변 (사용자)',
         href: '05_보완요청_답변_기업.html',
+        role: 'user',
         sub: [
           { label: '사업공고접수 목록 진입', href: '05_보완요청_답변_기업.html#s-목록' },
           { label: '요건검토 탭 확인',       href: '05_보완요청_답변_기업.html#s-요건검토' },
@@ -71,6 +76,7 @@ const NAV = [
       {
         label: '06. 보완요청 답변 검토 (관리자)',
         href: '06_보완요청_답변검토_관리자.html',
+        role: 'admin',
         sub: [
           { label: '접수내역 목록 진입',  href: '06_보완요청_답변검토_관리자.html#s-목록' },
           { label: '요건검토 탭 확인',    href: '06_보완요청_답변검토_관리자.html#s-요건검토' },
@@ -81,6 +87,7 @@ const NAV = [
       {
         label: '07. 선정평가 등록 (관리자)',
         href: '07_선정평가_등록_관리자.html',
+        role: 'admin',
         sub: [
           { label: '평가등록 공고 목록',   href: '07_선정평가_등록_관리자.html#s-공고목록' },
           { label: '프로그램/평가표 관리', href: '07_선정평가_등록_관리자.html#s-평가표관리' },
@@ -92,6 +99,7 @@ const NAV = [
       {
         label: '08. 선정평가 진행 (평가위원)',
         href: '08_선정평가_진행_평가위원.html',
+        role: 'evaluator',
         sub: [
           { label: '본인인증',             href: '08_선정평가_진행_평가위원.html#s-본인인증' },
           { label: '평가공고/과제 선택',   href: '08_선정평가_진행_평가위원.html#s-과제선택' },
@@ -102,6 +110,7 @@ const NAV = [
       {
         label: '09. 선정평가 진행 (평가위원장)',
         href: '09_선정평가_진행_평가위원장.html',
+        role: 'evaluator',
         sub: [
           { label: '종합평가표 확인',        href: '09_선정평가_진행_평가위원장.html#s-종합평가표' },
           { label: '평가위원별 평가표 확인', href: '09_선정평가_진행_평가위원장.html#s-위원별평가표' },
@@ -110,6 +119,7 @@ const NAV = [
       {
         label: '10. 선정결과 처리 (관리자)',
         href: '10_선정결과_처리_관리자.html',
+        role: 'admin',
         sub: [
           { label: '공고 목록 진입',            href: '10_선정결과_처리_관리자.html#s-공고목록' },
           { label: '프로그램/과제 목록 확인',   href: '10_선정결과_처리_관리자.html#s-과제목록' },
@@ -120,8 +130,9 @@ const NAV = [
         ]
       },
       {
-        label: '11. 평가결과 확인 및 제출 (기업)',
+        label: '11. 평가결과 확인 및 제출 (사용자)',
         href: '11_평가결과_확인_기업.html',
+        role: 'user',
         sub: [
           { label: '과제 목록 진입',        href: '11_평가결과_확인_기업.html#s-과제목록' },
           { label: '평가결과 목록 확인',    href: '11_평가결과_확인_기업.html#s-결과목록' },
@@ -131,6 +142,7 @@ const NAV = [
       {
         label: '12. 협약정보 등록요청 (관리자)',
         href: '12_협약정보_등록요청_관리자.html',
+        role: 'admin',
         sub: [
           { label: '전자협약 공고 목록 진입',  href: '12_협약정보_등록요청_관리자.html#s-공고목록' },
           { label: '프로그램/과제 목록 확인', href: '12_협약정보_등록요청_관리자.html#s-과제목록' },
@@ -139,8 +151,9 @@ const NAV = [
         ]
       },
       {
-        label: '13. 협약정보 등록 (기업)',
+        label: '13. 협약정보 등록 (사용자)',
         href: '13_협약정보_등록_기업.html',
+        role: 'user',
         sub: [
           { label: '과제 목록 진입',    href: '13_협약정보_등록_기업.html#s-과제목록' },
           { label: '협약 목록 확인',    href: '13_협약정보_등록_기업.html#s-협약목록' },
@@ -155,6 +168,7 @@ const NAV = [
       {
         label: '14. 협약정보 검토 및 협약서 등록 (관리자)',
         href: '14_협약정보_검토_협약서등록_관리자.html',
+        role: 'admin',
         sub: [
           { label: '전자협약 공고 목록 진입',  href: '14_협약정보_검토_협약서등록_관리자.html#s-공고목록' },
           { label: '프로그램/과제 목록 확인', href: '14_협약정보_검토_협약서등록_관리자.html#s-과제목록' },
@@ -164,8 +178,9 @@ const NAV = [
         ]
       },
       {
-        label: '15. 전자협약 진행 (기업)',
+        label: '15. 전자협약 진행 (사용자)',
         href: '15_전자협약_진행_기업.html',
+        role: 'user',
         sub: [
           { label: '과제 목록 진입',        href: '15_전자협약_진행_기업.html#s-과제목록' },
           { label: '협약 목록 확인',        href: '15_전자협약_진행_기업.html#s-협약목록' },
@@ -177,6 +192,7 @@ const NAV = [
       {
         label: '16. 전자협약 진행 (관리자)',
         href: '16_전자협약_진행_관리자.html',
+        role: 'admin',
         sub: [
           { label: '전자협약 공고 목록 진입', href: '16_전자협약_진행_관리자.html#s-공고목록' },
           { label: '프로그램/과제 목록 확인', href: '16_전자협약_진행_관리자.html#s-과제목록' },
@@ -187,8 +203,9 @@ const NAV = [
         ]
       },
       {
-        label: '17. 사업비 지급 신청 (기업)',
+        label: '17. 사업비 지급 신청 (사용자)',
         href: '17_사업비_지급신청_기업.html',
+        role: 'user',
         sub: [
           { label: '지급신청 목록 진입',    href: '17_사업비_지급신청_기업.html#s-신청목록' },
           { label: '지급신청서 확인',       href: '17_사업비_지급신청_기업.html#s-신청서' },
@@ -198,6 +215,7 @@ const NAV = [
       {
         label: '18. 사업비 지급 처리 (관리자)',
         href: '18_사업비_지급처리_관리자.html',
+        role: 'admin',
         sub: [
           { label: '공고 목록 진입',          href: '18_사업비_지급처리_관리자.html#s-공고목록' },
           { label: '프로그램/과제 목록 확인', href: '18_사업비_지급처리_관리자.html#s-과제목록' },
@@ -206,8 +224,9 @@ const NAV = [
         ]
       },
       {
-        label: '19. 사업비 집행관리 (기업)',
+        label: '19. 사업비 집행관리 (사용자)',
         href: '19_사업비_집행관리_기업.html',
+        role: 'user',
         sub: [
           { label: '과제 목록 진입',      href: '19_사업비_집행관리_기업.html#s-과제목록' },
           { label: '집행 내역 등록',      href: '19_사업비_집행관리_기업.html#s-집행관리' },
@@ -216,6 +235,7 @@ const NAV = [
       {
         label: '20. 사업비 집행 확인 (관리자)',
         href: '20_사업비_집행확인_관리자.html',
+        role: 'admin',
         sub: [
           { label: '공고 목록 진입',        href: '20_사업비_집행확인_관리자.html#s-공고목록' },
           { label: '집행관리 상세 확인',    href: '20_사업비_집행확인_관리자.html#s-집행상세' },
@@ -224,6 +244,7 @@ const NAV = [
       {
         label: '21. 보고서 제출 요청 (관리자)',
         href: '21_보고서_제출요청_관리자.html',
+        role: 'admin',
         sub: [
           { label: '공고 목록 진입',        href: '21_보고서_제출요청_관리자.html#s-공고목록' },
           { label: '프로그램/과제 목록',    href: '21_보고서_제출요청_관리자.html#s-과제목록' },
@@ -233,8 +254,9 @@ const NAV = [
         ]
       },
       {
-        label: '22. 보고서 제출 (기업)',
+        label: '22. 보고서 제출 (사용자)',
         href: '22_보고서_제출_기업.html',
+        role: 'user',
         sub: [
           { label: '과제 목록 진입',            href: '22_보고서_제출_기업.html#s-과제목록' },
           { label: '보고서 요청내용 확인 및 제출', href: '22_보고서_제출_기업.html#s-보고서제출' },
@@ -243,6 +265,7 @@ const NAV = [
       {
         label: '23. 보고서 제출 확인 (관리자)',
         href: '23_보고서_제출확인_관리자.html',
+        role: 'admin',
         sub: [
           { label: '공고 목록 진입',      href: '23_보고서_제출확인_관리자.html#s-공고목록' },
           { label: '프로그램/과제 목록',  href: '23_보고서_제출확인_관리자.html#s-과제목록' },
@@ -254,6 +277,42 @@ const NAV = [
     ]
   },
 ];
+
+/* ── Role filter ──────────────────────────────────────────────── */
+let activeRole = 'all';
+
+function initRoleFilter() {
+  const sidebar = document.getElementById('sidebar');
+  const navList = document.getElementById('nav-list');
+  if (!sidebar || !navList) return;
+
+  const filterEl = document.createElement('div');
+  filterEl.className = 'role-filter';
+  filterEl.innerHTML = `
+    <button class="rf-btn rf-all active" data-role="all">전체</button>
+    <button class="rf-btn rf-user" data-role="user">사용자</button>
+    <button class="rf-btn rf-admin" data-role="admin">관리자</button>
+    <button class="rf-btn rf-eval" data-role="evaluator">평가위원</button>
+  `;
+  sidebar.insertBefore(filterEl, navList);
+
+  filterEl.addEventListener('click', e => {
+    const btn = e.target.closest('.rf-btn');
+    if (!btn) return;
+    activeRole = btn.dataset.role;
+    filterEl.querySelectorAll('.rf-btn').forEach(b => b.classList.toggle('active', b === btn));
+    applyRoleFilter();
+  });
+}
+
+function applyRoleFilter() {
+  const navList = document.getElementById('nav-list');
+  if (!navList) return;
+  navList.querySelectorAll('.nav-entry').forEach(el => {
+    const role = el.dataset.role;
+    el.style.display = (activeRole === 'all' || !role || role === activeRole) ? '' : 'none';
+  });
+}
 
 /* ── Build sidebar HTML ───────────────────────────────────────── */
 function buildNav(containerId) {
@@ -269,8 +328,10 @@ function buildNav(containerId) {
 
     section.items.forEach(item => {
       const isActive = currentFile === item.href.split('/').pop().split('#')[0];
+      const roleAttr = item.role ? ` data-role="${item.role}"` : '';
 
       if (item.sub) {
+        html += `<div class="nav-entry"${roleAttr}>`;
         html += `
         <div class="nav-parent${isActive ? ' open' : ''}" data-target="sub-${slugify(item.label)}">
           <a class="nav-item${isActive ? ' active' : ''}" href="${item.href}" style="flex:1;border-left:none;">
@@ -284,9 +345,9 @@ function buildNav(containerId) {
           const subActive = isActive && location.hash === new URL(s.href, location.href).hash;
           html += `<a class="nav-item${subActive ? ' active' : ''}" href="${s.href}">${s.label}</a>`;
         });
-        html += `</div>`;
+        html += `</div></div>`;
       } else {
-        html += `<a class="nav-item${isActive ? ' active' : ''}" href="${item.href}">${item.label}</a>`;
+        html += `<div class="nav-entry"${roleAttr}><a class="nav-item${isActive ? ' active' : ''}" href="${item.href}">${item.label}</a></div>`;
       }
     });
 
@@ -612,6 +673,7 @@ function initLightbox() {
 /* ── Init ─────────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   buildNav('nav-list');
+  initRoleFilter();
   initSearch('nav-search', 'nav-list');
   initHamburger('hamburger', 'sidebar');
   initScrollSpy();
