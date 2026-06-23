@@ -95,6 +95,35 @@ body {
 }
 .sidebar-search input:focus { border-color: var(--navy-light); }
 
+/* ── Role filter buttons ── */
+.role-filter {
+  display: flex;
+  gap: 4px;
+  padding: 8px 12px 10px;
+  border-bottom: 1px solid var(--accent2);
+  flex-wrap: wrap;
+}
+.rf-btn {
+  flex: 1;
+  padding: 5px 4px;
+  font-size: 11px;
+  font-family: inherit;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: #fff;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  text-align: center;
+}
+.rf-btn:hover { border-color: var(--navy); color: var(--navy); }
+.rf-btn.active.rf-all  { background: var(--navy);    color: #fff; border-color: var(--navy); }
+.rf-btn.active.rf-user { background: #059669;        color: #fff; border-color: #059669; }
+.rf-btn.active.rf-admin { background: #3730A3;       color: #fff; border-color: #3730A3; }
+.rf-btn.active.rf-eval  { background: #7C3AED;       color: #fff; border-color: #7C3AED; }
+
 .nav-section { padding: 10px 0; }
 .nav-section-title {
   padding: 6px 16px 4px;
