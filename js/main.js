@@ -532,15 +532,33 @@ function initLightbox() {
     guide.classList.add('visible');
     clearTimeout(guideTimer);
     guideTimer = setTimeout(() => guide.classList.remove('visible'), 2500);
+    // 모바일 뒤로가기로 닫을 수 있도록 히스토리 상태 push
+    history.pushState({ lightbox: true }, '');
   }
 
   function close() {
+    if (!box.classList.contains('open')) return;
     box.classList.remove('open');
     document.body.style.overflow = '';
     img.src = '';
     passBuffer = '';
     resetTransform();
+    // X버튼·ESC·배경클릭으로 닫을 때 push했던 상태 제거
+    if (history.state && history.state.lightbox) {
+      history.back();
+    }
   }
+
+  // 모바일 뒤로가기 버튼 → 라이트박스 닫기 (페이지 이동 없이)
+  window.addEventListener('popstate', () => {
+    if (box.classList.contains('open')) {
+      box.classList.remove('open');
+      document.body.style.overflow = '';
+      img.src = '';
+      passBuffer = '';
+      resetTransform();
+    }
+  });
 
   /* 휠 줌 — 커서 위치 기준 */
   box.addEventListener('wheel', e => {
