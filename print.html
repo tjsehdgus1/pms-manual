@@ -47,38 +47,34 @@
     /* ── 목차 페이지 ── */
     .toc-page {
       background: #fff; border-radius: 10px;
-      padding: 48px 56px; margin-bottom: 32px;
+      padding: 36px 48px; margin-bottom: 32px;
       box-shadow: 0 1px 6px rgba(0,0,0,0.08);
     }
     .toc-cover-title {
-      font-size: 26px; font-weight: 700; color: #1B3A6B; margin-bottom: 4px;
+      font-size: 20px; font-weight: 700; color: #1B3A6B; margin-bottom: 2px;
     }
     .toc-cover-sub {
-      font-size: 14px; color: #888; margin-bottom: 36px;
-      padding-bottom: 20px; border-bottom: 2px solid #D0DCF0;
-    }
-    .toc-page h2 {
-      font-size: 14px; font-weight: 700; color: #1B3A6B;
-      margin: 24px 0 8px; text-transform: uppercase; letter-spacing: .5px;
+      font-size: 12px; color: #888; margin-bottom: 14px;
+      padding-bottom: 12px; border-bottom: 2px solid #D0DCF0;
     }
     .toc-list { list-style: none; padding: 0; margin: 0; }
     .toc-list li {
-      display: flex; align-items: center; gap: 8px;
-      padding: 7px 0; border-bottom: 1px dotted #e2e8f0; font-size: 14px;
+      display: flex; align-items: center; gap: 6px;
+      padding: 4px 0; border-bottom: 1px dotted #e2e8f0; font-size: 12px;
     }
     .toc-list li:last-child { border-bottom: none; }
     .toc-label { flex: 1; color: #222; }
     .toc-dots {
       flex: 1; border-bottom: 1px dotted #ccc;
-      margin: 0 8px; min-width: 40px;
+      margin: 0 6px; min-width: 30px;
     }
     .toc-page-num {
-      font-size: 13px; font-weight: 600; color: #1B3A6B;
-      min-width: 28px; text-align: right;
+      font-size: 12px; font-weight: 600; color: #1B3A6B;
+      min-width: 24px; text-align: right;
     }
     .toc-role {
-      display: inline-block; font-size: 10px; font-weight: 700;
-      padding: 2px 7px; border-radius: 10px; white-space: nowrap; flex-shrink: 0;
+      display: inline-block; font-size: 9px; font-weight: 700;
+      padding: 1px 6px; border-radius: 10px; white-space: nowrap; flex-shrink: 0;
     }
     .toc-role.user      { background: #D1FAE5; color: #065F46; }
     .toc-role.admin     { background: #E0E7FF; color: #3730A3; }
@@ -103,10 +99,10 @@
     /* ── 인쇄 전용 ── */
     @page {
       size: A4;
-      margin: 20mm 15mm 28mm;
+      margin: 14mm 12mm 18mm;
     }
     @page :first {
-      margin-top: 30mm;
+      margin-top: 20mm;
       @bottom-center { content: none; }
       @bottom-right  { content: none; }
     }
@@ -145,10 +141,10 @@
         box-shadow: none; border-radius: 0; padding: 0; margin: 0; overflow: visible;
       }
 
-      /* ★ 핵심: 이미지 최대 높이 제한 → 페이지 절반 이하 */
+      /* 이미지 최대 높이 90mm */
       img {
         max-width: 100% !important;
-        max-height: 120mm !important;
+        max-height: 90mm !important;
         height: auto !important;
         width: auto !important;
         object-fit: contain !important;
@@ -156,7 +152,13 @@
         page-break-inside: avoid; break-inside: avoid;
       }
 
-      /* h2 + 다음 내용 분리 방지 */
+      /* h2 블록 (제목+설명) 통째로 분리 방지 — JS가 .step-intro로 묶음 */
+      .step-intro {
+        page-break-inside: avoid; break-inside: avoid;
+        page-break-after: avoid; break-after: avoid;
+      }
+
+      /* h2 자체도 다음 내용과 분리 방지 (fallback) */
       h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
       h2 + p, h2 + .menu-path, h2 + .box { page-break-before: avoid; break-before: avoid; }
 
@@ -272,6 +274,30 @@ function estimatePageNumbers(sectionEls) {
   return pageNums;
 }
 
+// h2 + 바로 다음 .menu-path + p 텍스트를 하나의 블록으로 묶어 페이지 분리 방지
+function wrapStepIntros(section) {
+  const children = Array.from(section.childNodes).filter(n => n.nodeType === 1);
+  let i = 0;
+  while (i < children.length) {
+    const el = children[i];
+    if (el.tagName === 'H2') {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'step-intro';
+      el.parentNode.insertBefore(wrapper, el);
+      wrapper.appendChild(el);
+      // 바로 뒤 .menu-path, p 요소도 같은 블록에 포함 (이미지·박스 제외)
+      let next = wrapper.nextElementSibling;
+      while (next && !['H1','H2','H3'].includes(next.tagName) && next.tagName !== 'IMG'
+             && !next.classList.contains('box') && !next.classList.contains('section-header')) {
+        const toMove = next;
+        next = next.nextElementSibling;
+        wrapper.appendChild(toMove);
+      }
+    }
+    i++;
+  }
+}
+
 async function loadSections() {
   const container = document.getElementById('print-body');
   const loading   = document.getElementById('loading');
@@ -299,6 +325,9 @@ async function loadSections() {
         const src = img.getAttribute('src') || '';
         if (src.startsWith('../')) img.src = src.replace('../', '');
       });
+
+      // h2 + 바로 다음 메뉴경로·설명 텍스트를 .step-intro 블록으로 묶어 분리 방지
+      wrapStepIntros(div);
 
       container.appendChild(div);
       sectionEls.push(div);
