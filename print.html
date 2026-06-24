@@ -228,41 +228,26 @@ const SECTIONS = [
   { label: '23. 보고서 제출 확인',                    file: 'sections/23_보고서_제출확인_관리자.html',          role: 'admin' },
 ];
 
-// 목차 DOM 생성 (페이지 번호는 나중에 채움)
+// 목차 DOM 생성 — 번호 순서대로 단일 목록 (페이지 번호는 로드 후 채움)
 function buildTOC() {
-  const groups = [
-    { key: 'user',      title: '사용자 매뉴얼',   items: [] },
-    { key: 'admin',     title: '관리자 매뉴얼',   items: [] },
-    { key: 'evaluator', title: '평가위원 매뉴얼', items: [] },
-  ];
+  let rows = '';
   SECTIONS.forEach((s, i) => {
-    const g = groups.find(g => g.key === s.role);
-    if (g) g.items.push({ ...s, idx: i });
-  });
-
-  let html = `
-    <div class="toc-cover-title">전남테크노파크 PMS 매뉴얼</div>
-    <div class="toc-cover-sub">Project Management System 사용자 매뉴얼 &middot; 전체 목차</div>
-  `;
-
-  groups.forEach(g => {
-    if (!g.items.length) return;
-    html += `<h2>${g.title}</h2><ul class="toc-list">`;
-    g.items.forEach(s => {
-      html += `
-        <li>
-          <span class="toc-role ${s.role}">${ROLE_LABEL[s.role]}</span>
-          <span class="toc-label">${s.label}</span>
-          <span class="toc-dots"></span>
-          <span class="toc-page-num" data-idx="${s.idx}">…</span>
-        </li>`;
-    });
-    html += `</ul>`;
+    rows += `
+      <li>
+        <span class="toc-role ${s.role}">${ROLE_LABEL[s.role]}</span>
+        <span class="toc-label">${s.label}</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page-num" data-idx="${i}">…</span>
+      </li>`;
   });
 
   const div = document.createElement('div');
   div.className = 'toc-page';
-  div.innerHTML = html;
+  div.innerHTML = `
+    <div class="toc-cover-title">전남테크노파크 PMS 매뉴얼</div>
+    <div class="toc-cover-sub">Project Management System 사용자 매뉴얼 &middot; 전체 목차</div>
+    <ul class="toc-list">${rows}</ul>
+  `;
   return div;
 }
 
