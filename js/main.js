@@ -38,6 +38,20 @@ const NAV = [
         ]
       },
       {
+        label: '00-C. 평가위원 신청 (평가위원)',
+        href: '00c_평가위원_신청.html',
+        role: 'evaluator',
+        sub: [
+          { label: '안내사항 확인',    href: '00c_평가위원_신청.html#s-안내사항' },
+          { label: '이용동의',         href: '00c_평가위원_신청.html#s-이용동의' },
+          { label: '기본정보 입력',    href: '00c_평가위원_신청.html#s-기본정보' },
+          { label: '학력정보 입력',    href: '00c_평가위원_신청.html#s-학력정보' },
+          { label: '경력정보 입력',    href: '00c_평가위원_신청.html#s-경력정보' },
+          { label: '논문/저역서 입력', href: '00c_평가위원_신청.html#s-논문저역서' },
+          { label: '자격/포상 입력',   href: '00c_평가위원_신청.html#s-자격포상' },
+        ]
+      },
+      {
         label: '01. 사업관리 / 프로젝트 관리 (관리자)',
         href: '01_사업관리.html',
         role: 'admin',
