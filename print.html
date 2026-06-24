@@ -84,39 +84,134 @@
       margin: 16px 0;
     }
 
-    /* 섹션 헤더 숨김 처리 (breadcrumb) */
+    /* breadcrumb 숨김 */
     .print-section .breadcrumb { display: none; }
 
+    /* 목차 페이지 스타일 */
+    .toc-page {
+      background: #fff;
+      border-radius: 10px;
+      padding: 48px 56px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    }
+    .toc-cover-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1B3A6B;
+      margin-bottom: 4px;
+    }
+    .toc-cover-sub {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 36px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #D0DCF0;
+    }
+    .toc-page h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1B3A6B;
+      margin: 20px 0 8px;
+    }
+    .toc-list { list-style: none; padding: 0; margin: 0; }
+    .toc-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 0;
+      border-bottom: 1px dotted #e2e8f0;
+      font-size: 14px;
+      color: #222;
+    }
+    .toc-list li:last-child { border-bottom: none; }
+    .toc-role {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .toc-role.user     { background: #D1FAE5; color: #065F46; }
+    .toc-role.admin    { background: #E0E7FF; color: #3730A3; }
+    .toc-role.evaluator{ background: #EDE9FE; color: #5B21B6; }
+
     /* ── 인쇄 전용 ── */
+    @page {
+      size: A4;
+      margin: 20mm 15mm 25mm;
+    }
+    @page :first {
+      margin-top: 30mm;
+    }
+
     @media print {
       #print-header, #print-btn, #loading { display: none !important; }
 
-      body { background: #fff !important; font-size: 11pt; }
+      body {
+        background: #fff !important;
+        font-size: 10.5pt;
+        /* 쪽번호 카운터 */
+        counter-reset: page-counter;
+      }
 
       #print-body {
         max-width: 100%;
         margin: 0;
         padding: 0;
+        /* 쪽번호: 하단 중앙 */
+        counter-increment: page-counter;
       }
 
+      /* 쪽번호 — 각 섹션 하단에 표시 */
+      @page {
+        @bottom-center {
+          content: counter(page);
+          font-family: 'Noto Sans KR', sans-serif;
+          font-size: 10pt;
+          color: #555;
+        }
+        @bottom-right {
+          content: "전남테크노파크 PMS 매뉴얼";
+          font-family: 'Noto Sans KR', sans-serif;
+          font-size: 9pt;
+          color: #aaa;
+        }
+      }
+      @page :first {
+        @bottom-center { content: none; }
+        @bottom-right  { content: none; }
+      }
+
+      /* 목차 페이지 */
+      .toc-page {
+        page-break-after: always;
+        break-after: page;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+        margin: 0;
+        background: #fff;
+      }
+
+      /* 섹션 — 항상 새 페이지에서 시작 */
       .print-section {
         page-break-before: always;
         break-before: page;
         box-shadow: none;
         border-radius: 0;
-        padding: 20mm 15mm;
+        padding: 0;
         margin: 0;
         background: #fff;
-      }
-
-      .print-section:first-child {
-        page-break-before: avoid;
-        break-before: avoid;
+        overflow: visible;
       }
 
       /* 이미지 페이지 이탈 방지 */
       img {
         max-width: 100% !important;
+        height: auto !important;
         page-break-inside: avoid;
         break-inside: avoid;
       }
@@ -127,20 +222,46 @@
         break-inside: avoid;
       }
 
-      /* h2 이후 내용이 페이지 분리되지 않도록 */
-      h2 { page-break-after: avoid; break-after: avoid; }
+      /* 제목은 다음 내용과 분리 금지 */
+      h1, h2, h3 {
+        page-break-after: avoid;
+        break-after: avoid;
+        orphans: 3;
+        widows: 3;
+      }
+
+      /* 제목 바로 다음 단락·경로는 앞 페이지에 남기지 않음 */
+      h2 + p,
+      h2 + .menu-path,
+      h2 + .box {
+        page-break-before: avoid;
+        break-before: avoid;
+      }
+
+      /* 단락 고아/과부 방지 */
+      p {
+        orphans: 3;
+        widows: 3;
+      }
+
+      /* 섹션 헤더(h1 영역) 통째로 분리 방지 */
+      .section-header {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        page-break-after: avoid;
+        break-after: avoid;
+      }
 
       /* 링크 URL 숨김 */
       a[href]::after { content: none !important; }
 
-      /* 메뉴 경로 색상 보정 */
+      /* 색상 인쇄 보정 */
       .ui-label {
         background: #E8EEF7 !important;
         color: #1B3A6B !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
-
       .box-warn {
         background: #FFFBEB !important;
         border-left: 4px solid #F59E0B !important;
@@ -153,11 +274,15 @@
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
-
       .role-badge {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
+      .toc-role {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .toc-cover-title { color: #1B3A6B !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
 </head>
@@ -178,39 +303,74 @@
 <script>
 'use strict';
 
-// 인쇄할 섹션 순서 (NAV 순서와 동일)
+const ROLE_LABEL = { user: '사용자', admin: '관리자', evaluator: '평가위원' };
+
 const SECTIONS = [
-  { file: 'sections/00a_일반회원_가입.html',                      role: 'user' },
-  { file: 'sections/00b_기업기관_회원가입.html',                  role: 'user' },
-  { file: 'sections/00c_평가위원_신청.html',                      role: 'evaluator' },
-  { file: 'sections/01_사업관리.html',                            role: 'admin' },
-  { file: 'sections/02_지원사업공고.html',                        role: 'admin' },
-  { file: 'sections/03_공고신청_기업.html',                       role: 'user' },
-  { file: 'sections/04_요건검토_보완요청.html',                   role: 'admin' },
-  { file: 'sections/05_보완요청_답변_기업.html',                  role: 'user' },
-  { file: 'sections/06_보완요청_답변검토_관리자.html',            role: 'admin' },
-  { file: 'sections/07_선정평가_등록_관리자.html',                role: 'admin' },
-  { file: 'sections/08_선정평가_진행_평가위원.html',              role: 'evaluator' },
-  { file: 'sections/09_선정평가_진행_평가위원장.html',            role: 'evaluator' },
-  { file: 'sections/10_선정결과_처리_관리자.html',                role: 'admin' },
-  { file: 'sections/11_평가결과_확인_기업.html',                  role: 'user' },
-  { file: 'sections/12_협약정보_등록요청_관리자.html',            role: 'admin' },
-  { file: 'sections/13_협약정보_등록_기업.html',                  role: 'user' },
-  { file: 'sections/14_협약정보_검토_협약서등록_관리자.html',     role: 'admin' },
-  { file: 'sections/15_전자협약_진행_기업.html',                  role: 'user' },
-  { file: 'sections/16_전자협약_진행_관리자.html',                role: 'admin' },
-  { file: 'sections/17_사업비_지급신청_기업.html',                role: 'user' },
-  { file: 'sections/18_사업비_지급처리_관리자.html',              role: 'admin' },
-  { file: 'sections/19_사업비_집행관리_기업.html',                role: 'user' },
-  { file: 'sections/20_사업비_집행확인_관리자.html',              role: 'admin' },
-  { file: 'sections/21_보고서_제출요청_관리자.html',              role: 'admin' },
-  { file: 'sections/22_보고서_제출_기업.html',                    role: 'user' },
-  { file: 'sections/23_보고서_제출확인_관리자.html',              role: 'admin' },
+  { label: '00-A. 일반회원 가입',                      file: 'sections/00a_일반회원_가입.html',                   role: 'user' },
+  { label: '00-B. 기업/기관 회원가입',                 file: 'sections/00b_기업기관_회원가입.html',               role: 'user' },
+  { label: '00-C. 평가위원 신청',                      file: 'sections/00c_평가위원_신청.html',                   role: 'evaluator' },
+  { label: '01. 사업관리 / 프로젝트 관리',             file: 'sections/01_사업관리.html',                         role: 'admin' },
+  { label: '02. 지원사업공고',                         file: 'sections/02_지원사업공고.html',                     role: 'admin' },
+  { label: '03. 공고 신청',                            file: 'sections/03_공고신청_기업.html',                    role: 'user' },
+  { label: '04. 요건검토 / 보완요청',                  file: 'sections/04_요건검토_보완요청.html',                role: 'admin' },
+  { label: '05. 보완요청 답변',                        file: 'sections/05_보완요청_답변_기업.html',               role: 'user' },
+  { label: '06. 보완요청 답변 검토',                   file: 'sections/06_보완요청_답변검토_관리자.html',         role: 'admin' },
+  { label: '07. 선정평가 등록',                        file: 'sections/07_선정평가_등록_관리자.html',             role: 'admin' },
+  { label: '08. 선정평가 진행 (평가위원)',              file: 'sections/08_선정평가_진행_평가위원.html',           role: 'evaluator' },
+  { label: '09. 선정평가 진행 (평가위원장)',            file: 'sections/09_선정평가_진행_평가위원장.html',         role: 'evaluator' },
+  { label: '10. 선정결과 처리',                        file: 'sections/10_선정결과_처리_관리자.html',             role: 'admin' },
+  { label: '11. 평가결과 확인 및 제출',                file: 'sections/11_평가결과_확인_기업.html',               role: 'user' },
+  { label: '12. 협약정보 등록요청',                    file: 'sections/12_협약정보_등록요청_관리자.html',         role: 'admin' },
+  { label: '13. 협약정보 등록',                        file: 'sections/13_협약정보_등록_기업.html',               role: 'user' },
+  { label: '14. 협약정보 검토 및 협약서 등록',         file: 'sections/14_협약정보_검토_협약서등록_관리자.html',  role: 'admin' },
+  { label: '15. 전자협약 진행 (사용자)',                file: 'sections/15_전자협약_진행_기업.html',               role: 'user' },
+  { label: '16. 전자협약 진행 (관리자)',                file: 'sections/16_전자협약_진행_관리자.html',             role: 'admin' },
+  { label: '17. 사업비 지급 신청',                     file: 'sections/17_사업비_지급신청_기업.html',             role: 'user' },
+  { label: '18. 사업비 지급 처리',                     file: 'sections/18_사업비_지급처리_관리자.html',           role: 'admin' },
+  { label: '19. 사업비 집행관리',                      file: 'sections/19_사업비_집행관리_기업.html',             role: 'user' },
+  { label: '20. 사업비 집행 확인',                     file: 'sections/20_사업비_집행확인_관리자.html',           role: 'admin' },
+  { label: '21. 보고서 제출 요청',                     file: 'sections/21_보고서_제출요청_관리자.html',           role: 'admin' },
+  { label: '22. 보고서 제출',                          file: 'sections/22_보고서_제출_기업.html',                 role: 'user' },
+  { label: '23. 보고서 제출 확인',                     file: 'sections/23_보고서_제출확인_관리자.html',           role: 'admin' },
 ];
+
+function buildTOC() {
+  const groups = {
+    user:      { title: '사용자', items: [] },
+    admin:     { title: '관리자', items: [] },
+    evaluator: { title: '평가위원', items: [] },
+  };
+  SECTIONS.forEach(s => groups[s.role].items.push(s));
+
+  let html = `
+    <div class="toc-cover-title">전남테크노파크 PMS 매뉴얼</div>
+    <div class="toc-cover-sub">Project Management System 사용자 매뉴얼 · 전체 목차</div>
+  `;
+
+  for (const [, g] of Object.entries(groups)) {
+    if (!g.items.length) continue;
+    html += `<h2>${g.title} 매뉴얼</h2><ul class="toc-list">`;
+    g.items.forEach(s => {
+      html += `<li>
+        <span class="toc-role ${s.role}">${ROLE_LABEL[s.role]}</span>
+        ${s.label}
+      </li>`;
+    });
+    html += `</ul>`;
+  }
+
+  const div = document.createElement('div');
+  div.className = 'toc-page';
+  div.innerHTML = html;
+  return div;
+}
 
 async function loadSections() {
   const container = document.getElementById('print-body');
   const loading   = document.getElementById('loading');
+
+  // 목차 페이지 먼저 삽입
+  container.appendChild(buildTOC());
 
   for (const s of SECTIONS) {
     try {
@@ -220,18 +380,15 @@ async function loadSections() {
       const main = doc.querySelector('main#content');
       if (!main) continue;
 
-      // 섹션 div 생성
       const div = document.createElement('div');
       div.className = 'print-section';
       div.dataset.role = s.role;
       div.innerHTML = main.innerHTML;
 
-      // 섹션 내 상대경로 이미지 보정 (sections/ 경로)
+      // 상대경로 이미지 보정
       div.querySelectorAll('img').forEach(img => {
         const src = img.getAttribute('src') || '';
-        if (src.startsWith('../')) {
-          img.src = src.replace('../', '');
-        }
+        if (src.startsWith('../')) img.src = src.replace('../', '');
       });
 
       container.appendChild(div);
