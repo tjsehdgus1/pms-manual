@@ -8,281 +8,175 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* ── 화면 전용 ── */
+    /* ── 화면 공통 ── */
     body { background: #f8f9fb; }
 
     #print-header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 56px;
-      background: #1B3A6B;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      z-index: 200;
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 56px; background: #1B3A6B; color: #fff;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; z-index: 200;
       box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
     #print-header .logo { font-size: 16px; font-weight: 700; }
-    #print-header .logo span { opacity: 0.7; font-weight: 400; font-size: 13px; margin-left: 8px; }
-
+    #print-header .logo span { opacity:.7; font-weight:400; font-size:13px; margin-left:8px; }
     #print-btn {
-      padding: 8px 20px;
-      background: #fff;
-      color: #1B3A6B;
-      border: none;
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
+      padding: 8px 20px; background: #fff; color: #1B3A6B;
+      border: none; border-radius: 6px; font-family: inherit;
+      font-size: 14px; font-weight: 700; cursor: pointer;
       box-shadow: 0 1px 4px rgba(0,0,0,0.15);
     }
     #print-btn:hover { background: #E8EEF7; }
 
     #loading {
-      margin-top: 80px;
-      text-align: center;
-      padding: 60px 20px;
-      color: #555;
-      font-size: 15px;
+      margin-top: 80px; text-align: center; padding: 60px 20px;
+      color: #555; font-size: 15px;
     }
     .loading-spinner {
       width: 36px; height: 36px;
-      border: 3px solid #D0DCF0;
-      border-top-color: #1B3A6B;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
+      border: 3px solid #D0DCF0; border-top-color: #1B3A6B;
+      border-radius: 50%; animation: spin 0.8s linear infinite;
       margin: 0 auto 16px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     #print-body {
-      max-width: 900px;
-      margin: 72px auto 60px;
-      padding: 0 24px;
+      max-width: 900px; margin: 72px auto 60px; padding: 0 24px;
     }
 
-    /* 섹션 구분 */
-    .print-section {
-      background: #fff;
-      border-radius: 10px;
-      padding: 40px 48px;
-      margin-bottom: 32px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
-      overflow: hidden;
-    }
-
-    /* 이미지 가로 넘침 방지 */
-    .print-section img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
-      border: 1px solid #d0d5dd;
-      margin: 16px 0;
-    }
-
-    /* breadcrumb 숨김 */
-    .print-section .breadcrumb { display: none; }
-
-    /* 목차 페이지 스타일 */
+    /* ── 목차 페이지 ── */
     .toc-page {
-      background: #fff;
-      border-radius: 10px;
-      padding: 48px 56px;
-      margin-bottom: 32px;
+      background: #fff; border-radius: 10px;
+      padding: 48px 56px; margin-bottom: 32px;
       box-shadow: 0 1px 6px rgba(0,0,0,0.08);
     }
     .toc-cover-title {
-      font-size: 26px;
-      font-weight: 700;
-      color: #1B3A6B;
-      margin-bottom: 4px;
+      font-size: 26px; font-weight: 700; color: #1B3A6B; margin-bottom: 4px;
     }
     .toc-cover-sub {
-      font-size: 14px;
-      color: #888;
-      margin-bottom: 36px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid #D0DCF0;
+      font-size: 14px; color: #888; margin-bottom: 36px;
+      padding-bottom: 20px; border-bottom: 2px solid #D0DCF0;
     }
     .toc-page h2 {
-      font-size: 15px;
-      font-weight: 700;
-      color: #1B3A6B;
-      margin: 20px 0 8px;
+      font-size: 14px; font-weight: 700; color: #1B3A6B;
+      margin: 24px 0 8px; text-transform: uppercase; letter-spacing: .5px;
     }
     .toc-list { list-style: none; padding: 0; margin: 0; }
     .toc-list li {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 0;
-      border-bottom: 1px dotted #e2e8f0;
-      font-size: 14px;
-      color: #222;
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 0; border-bottom: 1px dotted #e2e8f0; font-size: 14px;
     }
     .toc-list li:last-child { border-bottom: none; }
-    .toc-role {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 10px;
-      white-space: nowrap;
-      flex-shrink: 0;
+    .toc-label { flex: 1; color: #222; }
+    .toc-dots {
+      flex: 1; border-bottom: 1px dotted #ccc;
+      margin: 0 8px; min-width: 40px;
     }
-    .toc-role.user     { background: #D1FAE5; color: #065F46; }
-    .toc-role.admin    { background: #E0E7FF; color: #3730A3; }
-    .toc-role.evaluator{ background: #EDE9FE; color: #5B21B6; }
+    .toc-page-num {
+      font-size: 13px; font-weight: 600; color: #1B3A6B;
+      min-width: 28px; text-align: right;
+    }
+    .toc-role {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      padding: 2px 7px; border-radius: 10px; white-space: nowrap; flex-shrink: 0;
+    }
+    .toc-role.user      { background: #D1FAE5; color: #065F46; }
+    .toc-role.admin     { background: #E0E7FF; color: #3730A3; }
+    .toc-role.evaluator { background: #EDE9FE; color: #5B21B6; }
+
+    /* ── 섹션 ── */
+    .print-section {
+      background: #fff; border-radius: 10px;
+      padding: 40px 48px; margin-bottom: 32px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08); overflow: hidden;
+    }
+    .print-section .breadcrumb { display: none; }
+
+    /* 이미지: 화면에서도 너무 크지 않게 */
+    .print-section img {
+      max-width: 100%; max-height: 55vh;
+      height: auto; width: auto;
+      display: block; object-fit: contain;
+      border-radius: 8px; border: 1px solid #d0d5dd; margin: 16px 0;
+    }
 
     /* ── 인쇄 전용 ── */
     @page {
       size: A4;
-      margin: 20mm 15mm 25mm;
+      margin: 20mm 15mm 28mm;
     }
     @page :first {
       margin-top: 30mm;
+      @bottom-center { content: none; }
+      @bottom-right  { content: none; }
+    }
+    @page {
+      @bottom-center {
+        content: counter(page);
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 10pt; color: #666;
+      }
+      @bottom-right {
+        content: "전남테크노파크 PMS 매뉴얼";
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 9pt; color: #aaa;
+      }
     }
 
     @media print {
       #print-header, #print-btn, #loading { display: none !important; }
 
-      body {
-        background: #fff !important;
-        font-size: 10.5pt;
-        /* 쪽번호 카운터 */
-        counter-reset: page-counter;
-      }
+      body { background: #fff !important; font-size: 10.5pt; line-height: 1.6; }
 
-      #print-body {
-        max-width: 100%;
-        margin: 0;
-        padding: 0;
-        /* 쪽번호: 하단 중앙 */
-        counter-increment: page-counter;
-      }
+      #print-body { max-width: 100%; margin: 0; padding: 0; }
 
-      /* 쪽번호 — 각 섹션 하단에 표시 */
-      @page {
-        @bottom-center {
-          content: counter(page);
-          font-family: 'Noto Sans KR', sans-serif;
-          font-size: 10pt;
-          color: #555;
-        }
-        @bottom-right {
-          content: "전남테크노파크 PMS 매뉴얼";
-          font-family: 'Noto Sans KR', sans-serif;
-          font-size: 9pt;
-          color: #aaa;
-        }
-      }
-      @page :first {
-        @bottom-center { content: none; }
-        @bottom-right  { content: none; }
-      }
-
-      /* 목차 페이지 */
+      /* 목차 — 별도 페이지 */
       .toc-page {
-        page-break-after: always;
-        break-after: page;
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0;
-        margin: 0;
-        background: #fff;
+        page-break-after: always; break-after: page;
+        box-shadow: none; border-radius: 0; padding: 0; margin: 0;
       }
+      /* 목차 색상 보정 */
+      .toc-cover-title { color: #1B3A6B !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .toc-role { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
-      /* 섹션 — 항상 새 페이지에서 시작 */
+      /* 섹션 — 항상 새 페이지 */
       .print-section {
-        page-break-before: always;
-        break-before: page;
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0;
-        margin: 0;
-        background: #fff;
-        overflow: visible;
+        page-break-before: always; break-before: page;
+        box-shadow: none; border-radius: 0; padding: 0; margin: 0; overflow: visible;
       }
 
-      /* 이미지 페이지 이탈 방지 */
+      /* ★ 핵심: 이미지 최대 높이 제한 → 페이지 절반 이하 */
       img {
         max-width: 100% !important;
+        max-height: 120mm !important;
         height: auto !important;
-        page-break-inside: avoid;
-        break-inside: avoid;
+        width: auto !important;
+        object-fit: contain !important;
+        display: block;
+        page-break-inside: avoid; break-inside: avoid;
       }
+
+      /* h2 + 다음 내용 분리 방지 */
+      h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
+      h2 + p, h2 + .menu-path, h2 + .box { page-break-before: avoid; break-before: avoid; }
+
+      /* 섹션 헤더 (h1 포함 영역) 분리 방지 */
+      .section-header { page-break-inside: avoid; break-inside: avoid; page-break-after: avoid; break-after: avoid; }
 
       /* 박스 이탈 방지 */
-      .box {
-        page-break-inside: avoid;
-        break-inside: avoid;
-      }
+      .box { page-break-inside: avoid; break-inside: avoid; }
 
-      /* 제목은 다음 내용과 분리 금지 */
-      h1, h2, h3 {
-        page-break-after: avoid;
-        break-after: avoid;
-        orphans: 3;
-        widows: 3;
-      }
-
-      /* 제목 바로 다음 단락·경로는 앞 페이지에 남기지 않음 */
-      h2 + p,
-      h2 + .menu-path,
-      h2 + .box {
-        page-break-before: avoid;
-        break-before: avoid;
-      }
-
-      /* 단락 고아/과부 방지 */
-      p {
-        orphans: 3;
-        widows: 3;
-      }
-
-      /* 섹션 헤더(h1 영역) 통째로 분리 방지 */
-      .section-header {
-        page-break-inside: avoid;
-        break-inside: avoid;
-        page-break-after: avoid;
-        break-after: avoid;
-      }
+      /* 고아/과부 방지 */
+      p { orphans: 3; widows: 3; }
 
       /* 링크 URL 숨김 */
       a[href]::after { content: none !important; }
 
       /* 색상 인쇄 보정 */
-      .ui-label {
-        background: #E8EEF7 !important;
-        color: #1B3A6B !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-      .box-warn {
-        background: #FFFBEB !important;
-        border-left: 4px solid #F59E0B !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-      .box-tip {
-        background: #EFF6FF !important;
-        border-left: 4px solid #3B82F6 !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-      .role-badge {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-      .toc-role {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-      }
-      .toc-cover-title { color: #1B3A6B !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .ui-label { background: #E8EEF7 !important; color: #1B3A6B !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .box-warn { background: #FFFBEB !important; border-left: 4px solid #F59E0B !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .box-tip  { background: #EFF6FF !important; border-left: 4px solid #3B82F6 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .role-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
 </head>
@@ -306,58 +200,65 @@
 const ROLE_LABEL = { user: '사용자', admin: '관리자', evaluator: '평가위원' };
 
 const SECTIONS = [
-  { label: '00-A. 일반회원 가입',                      file: 'sections/00a_일반회원_가입.html',                   role: 'user' },
-  { label: '00-B. 기업/기관 회원가입',                 file: 'sections/00b_기업기관_회원가입.html',               role: 'user' },
-  { label: '00-C. 평가위원 신청',                      file: 'sections/00c_평가위원_신청.html',                   role: 'evaluator' },
-  { label: '01. 사업관리 / 프로젝트 관리',             file: 'sections/01_사업관리.html',                         role: 'admin' },
-  { label: '02. 지원사업공고',                         file: 'sections/02_지원사업공고.html',                     role: 'admin' },
-  { label: '03. 공고 신청',                            file: 'sections/03_공고신청_기업.html',                    role: 'user' },
-  { label: '04. 요건검토 / 보완요청',                  file: 'sections/04_요건검토_보완요청.html',                role: 'admin' },
-  { label: '05. 보완요청 답변',                        file: 'sections/05_보완요청_답변_기업.html',               role: 'user' },
-  { label: '06. 보완요청 답변 검토',                   file: 'sections/06_보완요청_답변검토_관리자.html',         role: 'admin' },
-  { label: '07. 선정평가 등록',                        file: 'sections/07_선정평가_등록_관리자.html',             role: 'admin' },
-  { label: '08. 선정평가 진행 (평가위원)',              file: 'sections/08_선정평가_진행_평가위원.html',           role: 'evaluator' },
-  { label: '09. 선정평가 진행 (평가위원장)',            file: 'sections/09_선정평가_진행_평가위원장.html',         role: 'evaluator' },
-  { label: '10. 선정결과 처리',                        file: 'sections/10_선정결과_처리_관리자.html',             role: 'admin' },
-  { label: '11. 평가결과 확인 및 제출',                file: 'sections/11_평가결과_확인_기업.html',               role: 'user' },
-  { label: '12. 협약정보 등록요청',                    file: 'sections/12_협약정보_등록요청_관리자.html',         role: 'admin' },
-  { label: '13. 협약정보 등록',                        file: 'sections/13_협약정보_등록_기업.html',               role: 'user' },
-  { label: '14. 협약정보 검토 및 협약서 등록',         file: 'sections/14_협약정보_검토_협약서등록_관리자.html',  role: 'admin' },
-  { label: '15. 전자협약 진행 (사용자)',                file: 'sections/15_전자협약_진행_기업.html',               role: 'user' },
-  { label: '16. 전자협약 진행 (관리자)',                file: 'sections/16_전자협약_진행_관리자.html',             role: 'admin' },
-  { label: '17. 사업비 지급 신청',                     file: 'sections/17_사업비_지급신청_기업.html',             role: 'user' },
-  { label: '18. 사업비 지급 처리',                     file: 'sections/18_사업비_지급처리_관리자.html',           role: 'admin' },
-  { label: '19. 사업비 집행관리',                      file: 'sections/19_사업비_집행관리_기업.html',             role: 'user' },
-  { label: '20. 사업비 집행 확인',                     file: 'sections/20_사업비_집행확인_관리자.html',           role: 'admin' },
-  { label: '21. 보고서 제출 요청',                     file: 'sections/21_보고서_제출요청_관리자.html',           role: 'admin' },
-  { label: '22. 보고서 제출',                          file: 'sections/22_보고서_제출_기업.html',                 role: 'user' },
-  { label: '23. 보고서 제출 확인',                     file: 'sections/23_보고서_제출확인_관리자.html',           role: 'admin' },
+  { label: '00-A. 일반회원 가입',                     file: 'sections/00a_일반회원_가입.html',                  role: 'user' },
+  { label: '00-B. 기업/기관 회원가입',                file: 'sections/00b_기업기관_회원가입.html',              role: 'user' },
+  { label: '00-C. 평가위원 신청',                     file: 'sections/00c_평가위원_신청.html',                  role: 'evaluator' },
+  { label: '01. 사업관리 / 프로젝트 관리',            file: 'sections/01_사업관리.html',                        role: 'admin' },
+  { label: '02. 지원사업공고',                        file: 'sections/02_지원사업공고.html',                    role: 'admin' },
+  { label: '03. 공고 신청',                           file: 'sections/03_공고신청_기업.html',                   role: 'user' },
+  { label: '04. 요건검토 / 보완요청',                 file: 'sections/04_요건검토_보완요청.html',               role: 'admin' },
+  { label: '05. 보완요청 답변',                       file: 'sections/05_보완요청_답변_기업.html',              role: 'user' },
+  { label: '06. 보완요청 답변 검토',                  file: 'sections/06_보완요청_답변검토_관리자.html',        role: 'admin' },
+  { label: '07. 선정평가 등록',                       file: 'sections/07_선정평가_등록_관리자.html',            role: 'admin' },
+  { label: '08. 선정평가 진행 (평가위원)',             file: 'sections/08_선정평가_진행_평가위원.html',          role: 'evaluator' },
+  { label: '09. 선정평가 진행 (평가위원장)',           file: 'sections/09_선정평가_진행_평가위원장.html',        role: 'evaluator' },
+  { label: '10. 선정결과 처리',                       file: 'sections/10_선정결과_처리_관리자.html',            role: 'admin' },
+  { label: '11. 평가결과 확인 및 제출',               file: 'sections/11_평가결과_확인_기업.html',              role: 'user' },
+  { label: '12. 협약정보 등록요청',                   file: 'sections/12_협약정보_등록요청_관리자.html',        role: 'admin' },
+  { label: '13. 협약정보 등록',                       file: 'sections/13_협약정보_등록_기업.html',              role: 'user' },
+  { label: '14. 협약정보 검토 및 협약서 등록',        file: 'sections/14_협약정보_검토_협약서등록_관리자.html', role: 'admin' },
+  { label: '15. 전자협약 진행 (사용자)',               file: 'sections/15_전자협약_진행_기업.html',              role: 'user' },
+  { label: '16. 전자협약 진행 (관리자)',               file: 'sections/16_전자협약_진행_관리자.html',            role: 'admin' },
+  { label: '17. 사업비 지급 신청',                    file: 'sections/17_사업비_지급신청_기업.html',            role: 'user' },
+  { label: '18. 사업비 지급 처리',                    file: 'sections/18_사업비_지급처리_관리자.html',          role: 'admin' },
+  { label: '19. 사업비 집행관리',                     file: 'sections/19_사업비_집행관리_기업.html',            role: 'user' },
+  { label: '20. 사업비 집행 확인',                    file: 'sections/20_사업비_집행확인_관리자.html',          role: 'admin' },
+  { label: '21. 보고서 제출 요청',                    file: 'sections/21_보고서_제출요청_관리자.html',          role: 'admin' },
+  { label: '22. 보고서 제출',                         file: 'sections/22_보고서_제출_기업.html',                role: 'user' },
+  { label: '23. 보고서 제출 확인',                    file: 'sections/23_보고서_제출확인_관리자.html',          role: 'admin' },
 ];
 
+// 목차 DOM 생성 (페이지 번호는 나중에 채움)
 function buildTOC() {
-  const groups = {
-    user:      { title: '사용자', items: [] },
-    admin:     { title: '관리자', items: [] },
-    evaluator: { title: '평가위원', items: [] },
-  };
-  SECTIONS.forEach(s => groups[s.role].items.push(s));
+  const groups = [
+    { key: 'user',      title: '사용자 매뉴얼',   items: [] },
+    { key: 'admin',     title: '관리자 매뉴얼',   items: [] },
+    { key: 'evaluator', title: '평가위원 매뉴얼', items: [] },
+  ];
+  SECTIONS.forEach((s, i) => {
+    const g = groups.find(g => g.key === s.role);
+    if (g) g.items.push({ ...s, idx: i });
+  });
 
   let html = `
     <div class="toc-cover-title">전남테크노파크 PMS 매뉴얼</div>
-    <div class="toc-cover-sub">Project Management System 사용자 매뉴얼 · 전체 목차</div>
+    <div class="toc-cover-sub">Project Management System 사용자 매뉴얼 &middot; 전체 목차</div>
   `;
 
-  for (const [, g] of Object.entries(groups)) {
-    if (!g.items.length) continue;
-    html += `<h2>${g.title} 매뉴얼</h2><ul class="toc-list">`;
+  groups.forEach(g => {
+    if (!g.items.length) return;
+    html += `<h2>${g.title}</h2><ul class="toc-list">`;
     g.items.forEach(s => {
-      html += `<li>
-        <span class="toc-role ${s.role}">${ROLE_LABEL[s.role]}</span>
-        ${s.label}
-      </li>`;
+      html += `
+        <li>
+          <span class="toc-role ${s.role}">${ROLE_LABEL[s.role]}</span>
+          <span class="toc-label">${s.label}</span>
+          <span class="toc-dots"></span>
+          <span class="toc-page-num" data-idx="${s.idx}">…</span>
+        </li>`;
     });
     html += `</ul>`;
-  }
+  });
 
   const div = document.createElement('div');
   div.className = 'toc-page';
@@ -365,12 +266,35 @@ function buildTOC() {
   return div;
 }
 
+// 섹션 높이를 측정해 근사 페이지 번호 계산
+// A4 콘텐츠 높이: (297 - 20 - 28)mm = 249mm → 96dpi 기준 ≈ 940px
+// 화면 렌더링 너비 900px ≈ print 794px → 비율 보정 0.88
+function estimatePageNumbers(sectionEls) {
+  const A4_CONTENT_PX = 249 * (96 / 25.4); // ~940px
+  const WIDTH_RATIO   = 794 / 900;          // 화면→인쇄 너비 비율
+
+  const pageNums = [];
+  let page = 2; // 목차 = 1페이지, 섹션은 2페이지~
+
+  sectionEls.forEach(el => {
+    pageNums.push(Math.round(page));
+    const screenH = el.getBoundingClientRect().height;
+    const printH  = screenH * WIDTH_RATIO;         // 폭이 좁아지면 내용이 더 길어짐
+    const pages   = Math.max(1, Math.ceil(printH / A4_CONTENT_PX));
+    page += pages;
+  });
+
+  return pageNums;
+}
+
 async function loadSections() {
   const container = document.getElementById('print-body');
   const loading   = document.getElementById('loading');
 
-  // 목차 페이지 먼저 삽입
-  container.appendChild(buildTOC());
+  const tocEl = buildTOC();
+  container.appendChild(tocEl);
+
+  const sectionEls = [];
 
   for (const s of SECTIONS) {
     try {
@@ -392,12 +316,26 @@ async function loadSections() {
       });
 
       container.appendChild(div);
+      sectionEls.push(div);
     } catch (e) {
       console.warn('섹션 로드 실패:', s.file, e);
     }
   }
 
   loading.style.display = 'none';
+
+  // 이미지 로드 완료 후 페이지 번호 계산
+  await Promise.allSettled(
+    Array.from(container.querySelectorAll('img')).map(
+      img => img.complete ? Promise.resolve() : new Promise(r => { img.onload = r; img.onerror = r; })
+    )
+  );
+
+  const pageNums = estimatePageNumbers(sectionEls);
+  container.querySelectorAll('.toc-page-num[data-idx]').forEach(el => {
+    const idx = parseInt(el.dataset.idx, 10);
+    if (pageNums[idx] != null) el.textContent = pageNums[idx];
+  });
 }
 
 loadSections();
