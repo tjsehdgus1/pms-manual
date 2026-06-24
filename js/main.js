@@ -511,6 +511,8 @@ function initLightbox() {
   let guideTimer = null;
   /* 관리자 비밀 문구 입력 버퍼 (라이트박스 열린 동안 타이핑 추적) */
   let passBuffer = '';
+  /* 모바일 뒤로가기로 닫기 위해 추가한 history 항목이 있는지 추적 */
+  let pushedState = false;
 
   function applyTransform() {
     img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
@@ -532,14 +534,25 @@ function initLightbox() {
     guide.classList.add('visible');
     clearTimeout(guideTimer);
     guideTimer = setTimeout(() => guide.classList.remove('visible'), 2500);
+    /* 모바일 뒤로가기로 닫을 수 있도록 가짜 history 항목을 추가 */
+    if (!pushedState) {
+      history.pushState({ lightbox: true }, '');
+      pushedState = true;
+    }
   }
 
-  function close() {
+  /* fromPop: popstate(뒤로가기)로 호출된 경우 true → history.back() 재호출 안 함 */
+  function close(fromPop) {
     box.classList.remove('open');
     document.body.style.overflow = '';
     img.src = '';
     passBuffer = '';
     resetTransform();
+    /* X·ESC·배경클릭으로 닫은 경우엔 추가했던 history 항목을 직접 정리 */
+    if (pushedState) {
+      pushedState = false;
+      if (!fromPop) history.back();
+    }
   }
 
   /* 휠 줌 — 커서 위치 기준 */
@@ -607,7 +620,12 @@ function initLightbox() {
   }
 
   box.addEventListener('click', e => { if (e.target === box) close(); });
-  box.querySelector('#lightbox-close').addEventListener('click', close);
+  box.querySelector('#lightbox-close').addEventListener('click', () => close());
+
+  /* 뒤로가기(모바일 포함) → 페이지 이동 대신 라이트박스를 닫는다 */
+  window.addEventListener('popstate', () => {
+    if (box.classList.contains('open')) close(true);
+  });
 
   /* ── 관리자 전용 이미지 경로 편집기 ──────────────────────────── */
   const editor = document.createElement('div');
