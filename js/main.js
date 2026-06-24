@@ -12,6 +12,17 @@ const NAV = [
     title: '섹션 목록',
     items: [
       {
+        label: '00. 회원가입 (사용자)',
+        href: '00_회원가입_사용자.html',
+        role: 'user',
+        sub: [
+          { label: '회원 유형 선택', href: '00_회원가입_사용자.html#s-가입선택' },
+          { label: '약관 동의',     href: '00_회원가입_사용자.html#s-약관동의' },
+          { label: '본인인증',      href: '00_회원가입_사용자.html#s-본인인증' },
+          { label: '회원정보 작성', href: '00_회원가입_사용자.html#s-회원정보' },
+        ]
+      },
+      {
         label: '01. 사업관리 / 프로젝트 관리 (관리자)',
         href: '01_사업관리.html',
         role: 'admin',
