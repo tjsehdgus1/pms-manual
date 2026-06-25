@@ -353,6 +353,39 @@ p { margin-bottom: 12px; }
 .capture-box .cap-label { font-weight: 600; font-size: 14px; }
 .capture-box .cap-desc  { font-size: 12px; opacity: 0.7; }
 
+/* ── 섹션 이전/다음 네비게이션 ─────────────────────────────── */
+.section-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 40px 0 8px;
+}
+.section-nav .sec-nav-btn {
+  flex: 1 1 0;
+  max-width: 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 18px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  background: #fff;
+  color: #1B3A6B;
+  text-decoration: none;
+  transition: background 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+.section-nav .sec-nav-btn:hover {
+  background: #E8EEF7;
+  border-color: #1B3A6B;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+.section-nav .sec-nav-next { text-align: right; align-items: flex-end; }
+.section-nav .sec-nav-dir { font-size: 12px; font-weight: 700; opacity: 0.65; }
+.section-nav .sec-nav-title { font-size: 14px; font-weight: 600; }
+@media (max-width: 480px) {
+  .section-nav .sec-nav-title { font-size: 12px; }
+}
+
 /* ===== Table ===== */
 table {
   width: 100%;
