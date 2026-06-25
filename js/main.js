@@ -32,6 +32,7 @@ const NAV = [
           { label: '기업(기관) 조회/등록',    href: '00b_기업기관_회원가입.html#s-기업조회등록' },
           { label: '기업 조회',               href: '00b_기업기관_회원가입.html#s-기업조회' },
           { label: '공동인증서 인증',         href: '00b_기업기관_회원가입.html#s-공동인증' },
+          { label: 'KED 데이터 조회',         href: '00b_기업기관_회원가입.html#s-ked조회' },
           { label: '기업(기관) 정보 작성',    href: '00b_기업기관_회원가입.html#s-기업정보' },
           { label: '본인인증',                href: '00b_기업기관_회원가입.html#s-본인인증' },
           { label: '회원정보 작성',           href: '00b_기업기관_회원가입.html#s-회원정보' },
