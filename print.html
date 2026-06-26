@@ -294,8 +294,10 @@ async function loadSections() {
   container.appendChild(tocEl);
 
   const sectionEls = [];
+  let pageCss = '';
 
-  for (const s of SECTIONS) {
+  for (let i = 0; i < SECTIONS.length; i++) {
+    const s = SECTIONS[i];
     try {
       const res  = await fetch(s.file);
       const text = await res.text();
@@ -304,9 +306,15 @@ async function loadSections() {
       if (!main) continue;
 
       const div = document.createElement('div');
-      div.className = 'print-section';
+      div.className = 'print-section pg-' + i;
       div.dataset.role = s.role;
       div.innerHTML = main.innerHTML;
+
+      // 섹션마다 named @page 지정 → 페이지 하단 왼쪽에 현재 섹션명 표시
+      pageCss += `.print-section.pg-${i}{page:pg-${i}}@page pg-${i}{`
+        + `@bottom-left{content:"${s.label.replace(/["\\]/g, '\\$&')}";font-family:'Noto Sans KR',sans-serif;font-size:9pt;color:#888}`
+        + `@bottom-center{content:counter(page);font-family:'Noto Sans KR',sans-serif;font-size:10pt;color:#666}`
+        + `@bottom-right{content:"전남테크노파크 PMS 매뉴얼";font-family:'Noto Sans KR',sans-serif;font-size:9pt;color:#aaa}}`;
 
       // 상대경로 이미지 보정
       div.querySelectorAll('img').forEach(img => {
@@ -323,6 +331,11 @@ async function loadSections() {
       console.warn('섹션 로드 실패:', s.file, e);
     }
   }
+
+  // named @page 규칙 주입 (섹션명 꼬리말)
+  const pgStyle = document.createElement('style');
+  pgStyle.textContent = pageCss;
+  document.head.appendChild(pgStyle);
 
   loading.style.display = 'none';
 
