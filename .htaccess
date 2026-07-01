@@ -1,0 +1,12 @@
+# 한글 깨짐 방지: 모든 응답에 UTF-8 charset 명시
+AddDefaultCharset UTF-8
+
+<IfModule mod_mime.c>
+  AddType 'text/html; charset=UTF-8' .html
+  AddType 'text/css; charset=UTF-8' .css
+  AddType 'application/javascript; charset=UTF-8' .js
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header set Content-Type "text/html; charset=UTF-8" "expr=%{CONTENT_TYPE} =~ /^text\/html/"
+</IfModule>
