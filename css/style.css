@@ -54,8 +54,8 @@ body {
 }
 #header .logo span { opacity: 0.7; font-weight: 400; font-size: 13px; }
 
-/* 헤더 메타: 기준일(왼쪽) + PMS 바로가기(오른쪽) */
-#header .manual-date {
+/* 헤더 메타: 버전(왼쪽) + PMS 바로가기(오른쪽) */
+#header .manual-ver {
   margin-left: 14px;
   padding-left: 14px;
   border-left: 1px solid rgba(255,255,255,0.3);
@@ -64,18 +64,17 @@ body {
   opacity: 0.9;
   white-space: nowrap;
 }
-#header .manual-date strong { font-weight: 700; }
+#header .manual-ver strong { font-weight: 700; }
 #header .pms-link {
   margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
   background: #fff;
   color: var(--navy);
-  font-size: 13px;
-  font-weight: 700;
-  padding: 7px 14px;
-  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: 5px;
   text-decoration: none;
   white-space: nowrap;
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
@@ -83,7 +82,7 @@ body {
 }
 #header .pms-link:hover { background: #E8EEF7; }
 @media (max-width: 480px) {
-  #header .manual-date { margin-left: 8px; padding-left: 8px; font-size: 10px; }
+  #header .manual-ver { margin-left: 8px; padding-left: 8px; font-size: 10px; }
   #header .pms-link { font-size: 11px; padding: 6px 10px; }
 }
 #hamburger {
