@@ -5,18 +5,18 @@
  * 사용자용(외부 배포) 매뉴얼 빌드 스크립트
  * ─────────────────────────────────────────
  * - 원본(sections/, js/main.js, index.html)은 그대로 두고
- * - "관리자" 태그가 붙은 섹션만 제외한 정적 사본을 dist-user/ 에 생성한다.
+ * - "관리자" 태그가 붙은 섹션만 제외한 정적 사본을 pms-manual-user/ 에 생성한다.
  * - 남는 섹션(사용자·평가위원) 제목의 앞자리 번호(예: "00-A. ", "03. ")는 제거한다.
  *
  * 실행: node scripts/build-user-manual.js
- * 재생성이 필요할 때마다(섹션 추가/변경 시) 다시 실행하면 dist-user/ 가 갱신된다.
+ * 재생성이 필요할 때마다(섹션 추가/변경 시) 다시 실행하면 pms-manual-user/ 가 갱신된다.
  */
 
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const OUT  = path.join(ROOT, 'dist-user');
+const OUT  = path.join(ROOT, 'pms-manual-user');
 
 // print.html의 SECTIONS 목록과 동일한 순서/파일명을 유지한다.
 // (원본과 이 목록이 어긋나면 섹션이 새로 추가될 때 빌드 스크립트도 함께 갱신해야 함)
@@ -186,4 +186,4 @@ for (let idx = 0; idx < KEPT.length; idx++) {
   fs.writeFileSync(path.join(OUT, 'sections', cur.file), src, 'utf8');
 }
 
-console.log(`✅ dist-user/ 생성 완료 — 섹션 ${KEPT.length}개 (관리자 ${SECTIONS.length - KEPT.length}개 제외)`);
+console.log(`✅ pms-manual-user/ 생성 완료 — 섹션 ${KEPT.length}개 (관리자 ${SECTIONS.length - KEPT.length}개 제외)`);
