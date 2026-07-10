@@ -1,0 +1,782 @@
+'use strict';
+
+/* ── Sidebar nav data ─────────────────────────────────────────── */
+const NAV = [
+  {
+    "title": "매뉴얼 목차",
+    "items": [
+      {
+        "label": "전체 목차",
+        "href": "../index.html"
+      }
+    ]
+  },
+  {
+    "title": "섹션 목록",
+    "items": [
+      {
+        "label": "일반회원 가입 (사용자)",
+        "href": "00a_일반회원_가입.html",
+        "role": "user",
+        "sub": [
+          {
+            "label": "회원 유형 선택",
+            "href": "00a_일반회원_가입.html#s-가입선택"
+          },
+          {
+            "label": "약관 동의",
+            "href": "00a_일반회원_가입.html#s-약관동의"
+          },
+          {
+            "label": "본인인증",
+            "href": "00a_일반회원_가입.html#s-본인인증"
+          },
+          {
+            "label": "회원정보 작성",
+            "href": "00a_일반회원_가입.html#s-회원정보"
+          }
+        ]
+      },
+      {
+        "label": "기업/기관 회원가입 (사용자)",
+        "href": "00b_기업기관_회원가입.html",
+        "role": "user",
+        "sub": [
+          {
+            "label": "회원 유형 선택",
+            "href": "00b_기업기관_회원가입.html#s-가입선택"
+          },
+          {
+            "label": "약관 동의",
+            "href": "00b_기업기관_회원가입.html#s-약관동의"
+          },
+          {
+            "label": "기업(기관) 조회/등록",
+            "href": "00b_기업기관_회원가입.html#s-기업조회등록"
+          },
+          {
+            "label": "기업 조회",
+            "href": "00b_기업기관_회원가입.html#s-기업조회"
+          },
+          {
+            "label": "공동인증서 인증",
+            "href": "00b_기업기관_회원가입.html#s-공동인증"
+          },
+          {
+            "label": "KED 데이터 조회",
+            "href": "00b_기업기관_회원가입.html#s-ked조회"
+          },
+          {
+            "label": "기업(기관) 정보 작성",
+            "href": "00b_기업기관_회원가입.html#s-기업정보"
+          },
+          {
+            "label": "본인인증",
+            "href": "00b_기업기관_회원가입.html#s-본인인증"
+          },
+          {
+            "label": "회원정보 작성",
+            "href": "00b_기업기관_회원가입.html#s-회원정보"
+          },
+          {
+            "label": "소속회원 승인관리",
+            "href": "00b_기업기관_회원가입.html#s-회원관리"
+          }
+        ]
+      },
+      {
+        "label": "평가위원 신청 (평가위원)",
+        "href": "00c_평가위원_신청.html",
+        "role": "evaluator",
+        "sub": [
+          {
+            "label": "안내사항 확인",
+            "href": "00c_평가위원_신청.html#s-안내사항"
+          },
+          {
+            "label": "이용동의",
+            "href": "00c_평가위원_신청.html#s-이용동의"
+          },
+          {
+            "label": "기본정보 입력",
+            "href": "00c_평가위원_신청.html#s-기본정보"
+          },
+          {
+            "label": "학력정보 입력",
+            "href": "00c_평가위원_신청.html#s-학력정보"
+          },
+          {
+            "label": "경력정보 입력",
+            "href": "00c_평가위원_신청.html#s-경력정보"
+          },
+          {
+            "label": "논문/저역서 입력",
+            "href": "00c_평가위원_신청.html#s-논문저역서"
+          },
+          {
+            "label": "자격/포상 입력",
+            "href": "00c_평가위원_신청.html#s-자격포상"
+          }
+        ]
+      },
+      {
+        "label": "공고 신청 (사용자)",
+        "href": "03_공고신청_기업.html",
+        "role": "user",
+        "sub": [
+          {
+            "label": "공고 목록 진입",
+            "href": "03_공고신청_기업.html#s-공고목록"
+          },
+          {
+            "label": "공고 상세 확인",
+            "href": "03_공고신청_기업.html#s-공고상세"
+          },
+          {
+            "label": "프로그램 신청",
+            "href": "03_공고신청_기업.html#s-프로그램신청"
+          },
+          {
+            "label": "Step1 프로그램정보",
+            "href": "03_공고신청_기업.html#s-프로그램정보"
+          },
+          {
+            "label": "Step2 기업정보",
+            "href": "03_공고신청_기업.html#s-기업정보"
+          },
+          {
+            "label": "Step3 적격성진단",
+            "href": "03_공고신청_기업.html#s-적격성진단"
+          },
+          {
+            "label": "Step4 컨소시엄",
+            "href": "03_공고신청_기업.html#s-컨소시엄"
+          },
+          {
+            "label": "Step5 사업정보",
+            "href": "03_공고신청_기업.html#s-사업정보"
+          },
+          {
+            "label": "접수완료",
+            "href": "03_공고신청_기업.html#s-접수완료"
+          }
+        ]
+      },
+      {
+        "label": "보완요청 답변 (사용자)",
+        "href": "05_보완요청_답변_기업.html",
+        "role": "user",
+        "sub": [
+          {
+            "label": "사업공고접수 목록 진입",
+            "href": "05_보완요청_답변_기업.html#s-목록"
+          },
+          {
+            "label": "요건검토 탭 확인",
+            "href": "05_보완요청_답변_기업.html#s-요건검토"
+          },
+          {
+            "label": "보완요청 확인 및 답변",
+            "href": "05_보완요청_답변_기업.html#s-보완답변"
+          }
+        ]
+      },
+      {
+        "label": "선정평가 진행 (평가위원)",
+        "href": "08_선정평가_진행_평가위원.html",
+        "role": "evaluator",
+        "sub": [
+          {
+            "label": "본인인증",
+            "href": "08_선정평가_진행_평가위원.html#s-본인인증"
+          },
+          {
+            "label": "평가공고/과제 선택",
+            "href": "08_선정평가_진행_평가위원.html#s-과제선택"
+          },
+          {
+            "label": "평가과제 상세 확인",
+            "href": "08_선정평가_진행_평가위원.html#s-과제상세"
+          },
+          {
+            "label": "평가표 작성 및 제출",
+            "href": "08_선정평가_진행_평가위원.html#s-평가표"
+          }
+        ]
+      },
+      {
+        "label": "선정평가 진행 (평가위원장)",
+        "href": "09_선정평가_진행_평가위원장.html",
+        "role": "evaluator",
+        "sub": [
+          {
+            "label": "종합평가표 확인",
+            "href": "09_선정평가_진행_평가위원장.html#s-종합평가표"
+          },
+          {
+            "label": "평가위원별 평가표 확인",
+            "href": "09_선정평가_진행_평가위원장.html#s-위원별평가표"
+          },
+          {
+            "label": "조정지원금 입력",
+            "href": "09_선정평가_진행_평가위원장.html#s-조정지원금"
+          }
+        ]
+      },
+      {
+        "label": "평가결과 확인 및 제출 (사용자)",
+        "href": "11_평가결과_확인_기업.html",
+        "role": "user",
+        "sub": [
+          {
+            "label": "과제 목록 진입",
+            "href": "11_평가결과_확인_기업.html#s-과제목록"
+          },
+          {
+            "label": "평가결과 목록 확인",
+            "href": "11_평가결과_확인_기업.html#s-결과목록"
+          },
+          {
+            "label": "평가결과 상세 및 제출",
+            "href": "11_평가결과_확인_기업.html#s-결과상세"
+          }
+        ]
+      },
+      {
+        "label": "협약정보 등록 (사용자)",
+        "href": "13_협약정보_등록_기업.html",
+        "role": "user",
+        "sub": [
+          {
+            "label": "과제 목록 진입",
+            "href": "13_협약정보_등록_기업.html#s-과제목록"
+          },
+          {
+            "label": "협약 목록 확인",
+            "href": "13_협약정보_등록_기업.html#s-협약목록"
+          },
+          {
+            "label": "요청내용 확인",
+            "href": "13_협약정보_등록_기업.html#s-요청내용"
+          },
+          {
+            "label": "과제정보 입력",
+            "href": "13_협약정보_등록_기업.html#s-과제정보"
+          },
+          {
+            "label": "컨소시엄 입력",
+            "href": "13_협약정보_등록_기업.html#s-컨소시엄"
+          },
+          {
+            "label": "사업비 입력",
+            "href": "13_협약정보_등록_기업.html#s-사업비"
+          },
+          {
+            "label": "참여연구원 등록",
+            "href": "13_협약정보_등록_기업.html#s-참여연구원"
+          },
+          {
+            "label": "첨부자료 등록",
+            "href": "13_협약정보_등록_기업.html#s-첨부자료"
+          }
+        ]
+      },
+      {
+        "label": "전자협약 진행 (사용자)",
+        "href": "15_전자협약_진행_기업.html",
+        "role": "user",
+        "sub": [
+          {
+            "label": "과제 목록 진입",
+            "href": "15_전자협약_진행_기업.html#s-과제목록"
+          },
+          {
+            "label": "협약 목록 확인",
+            "href": "15_전자협약_진행_기업.html#s-협약목록"
+          },
+          {
+            "label": "전자협약 내용 확인",
+            "href": "15_전자협약_진행_기업.html#s-전자협약진행"
+          },
+          {
+            "label": "공동인증서 인증/서명",
+            "href": "15_전자협약_진행_기업.html#s-인증서인증"
+          },
+          {
+            "label": "전자협약 요청",
+            "href": "15_전자협약_진행_기업.html#s-전자협약요청"
+          }
+        ]
+      },
+      {
+        "label": "사업비 지급 신청 (사용자)",
+        "href": "17_사업비_지급신청_기업.html",
+        "role": "user",
+        "sub": [
+          {
+            "label": "지급신청 목록 진입",
+            "href": "17_사업비_지급신청_기업.html#s-신청목록"
+          },
+          {
+            "label": "지급신청서 확인",
+            "href": "17_사업비_지급신청_기업.html#s-신청서"
+          },
+          {
+            "label": "사업비 지급정보 작성",
+            "href": "17_사업비_지급신청_기업.html#s-정보작성"
+          }
+        ]
+      },
+      {
+        "label": "사업비 집행관리 (사용자)",
+        "href": "19_사업비_집행관리_기업.html",
+        "role": "user",
+        "sub": [
+          {
+            "label": "과제 목록 진입",
+            "href": "19_사업비_집행관리_기업.html#s-과제목록"
+          },
+          {
+            "label": "집행 내역 등록",
+            "href": "19_사업비_집행관리_기업.html#s-집행관리"
+          }
+        ]
+      },
+      {
+        "label": "보고서 제출 (사용자)",
+        "href": "22_보고서_제출_기업.html",
+        "role": "user",
+        "sub": [
+          {
+            "label": "과제 목록 진입",
+            "href": "22_보고서_제출_기업.html#s-과제목록"
+          },
+          {
+            "label": "보고서 요청내용 확인 및 제출",
+            "href": "22_보고서_제출_기업.html#s-보고서제출"
+          }
+        ]
+      }
+    ]
+  }
+];
+
+/* ── Role filter ──────────────────────────────────────────────── */
+let activeRole = 'all';
+
+function initRoleFilter() {
+  const sidebar = document.getElementById('sidebar');
+  const navList = document.getElementById('nav-list');
+  if (!sidebar || !navList) return;
+
+  const filterEl = document.createElement('div');
+  filterEl.className = 'role-filter';
+  filterEl.innerHTML = `
+    <button class="rf-btn rf-all active" data-role="all">전체</button>
+    <button class="rf-btn rf-user" data-role="user">사용자</button>
+    <button class="rf-btn rf-eval" data-role="evaluator">평가위원</button>
+  `;
+  sidebar.insertBefore(filterEl, navList);
+
+  filterEl.addEventListener('click', e => {
+    const btn = e.target.closest('.rf-btn');
+    if (!btn) return;
+    activeRole = btn.dataset.role;
+    filterEl.querySelectorAll('.rf-btn').forEach(b => b.classList.toggle('active', b === btn));
+    applyRoleFilter();
+  });
+}
+
+function applyRoleFilter() {
+  const navList = document.getElementById('nav-list');
+  if (!navList) return;
+  navList.querySelectorAll('.nav-entry').forEach(el => {
+    const role = el.dataset.role;
+    el.style.display = (activeRole === 'all' || !role || role === activeRole) ? '' : 'none';
+  });
+}
+
+/* ── Build sidebar HTML ───────────────────────────────────────── */
+function buildNav(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const currentFile = location.pathname.split('/').pop() || 'index.html';
+  let html = '';
+
+  NAV.forEach(section => {
+    html += `<div class="nav-section">
+      <div class="nav-section-title">${section.title}</div>`;
+
+    section.items.forEach(item => {
+      const isActive = currentFile === item.href.split('/').pop().split('#')[0];
+      const roleAttr = item.role ? ` data-role="${item.role}"` : '';
+
+      if (item.sub) {
+        html += `<div class="nav-entry"${roleAttr}>`;
+        html += `
+        <div class="nav-parent${isActive ? ' open' : ''}" data-target="sub-${slugify(item.label)}">
+          <a class="nav-item${isActive ? ' active' : ''}" href="${item.href}" style="flex:1;border-left:none;">
+            ${item.label}
+          </a>
+          <span class="caret" style="padding-right:12px;">▶</span>
+        </div>
+        <div class="nav-sub${isActive ? ' open' : ''}" id="sub-${slugify(item.label)}">`;
+
+        item.sub.forEach(s => {
+          const subActive = isActive && location.hash === new URL(s.href, location.href).hash;
+          html += `<a class="nav-item${subActive ? ' active' : ''}" href="${s.href}">${s.label}</a>`;
+        });
+        html += `</div></div>`;
+      } else {
+        html += `<div class="nav-entry"${roleAttr}><a class="nav-item${isActive ? ' active' : ''}" href="${item.href}">${item.label}</a></div>`;
+      }
+    });
+
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+
+  /* Caret toggle */
+  container.querySelectorAll('.nav-parent').forEach(el => {
+    el.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      const subId = el.dataset.target;
+      const sub = document.getElementById(subId);
+      if (!sub) return;
+      sub.classList.toggle('open');
+      el.classList.toggle('open');
+    });
+  });
+}
+
+/* ── Sidebar search filter ────────────────────────────────────── */
+function initSearch(inputId, navId) {
+  const input = document.getElementById(inputId);
+  const nav   = document.getElementById(navId);
+  if (!input || !nav) return;
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    nav.querySelectorAll('.nav-item').forEach(el => {
+      const match = !q || el.textContent.toLowerCase().includes(q);
+      el.style.display = match ? '' : 'none';
+    });
+    nav.querySelectorAll('.nav-section').forEach(sec => {
+      const visible = [...sec.querySelectorAll('.nav-item')].some(el => el.style.display !== 'none');
+      sec.style.display = visible ? '' : 'none';
+    });
+  });
+}
+
+/* ── Hamburger (mobile) ───────────────────────────────────────── */
+function initHamburger(btnId, sidebarId) {
+  const btn  = document.getElementById(btnId);
+  const side = document.getElementById(sidebarId);
+  if (!btn || !side) return;
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.addEventListener('click', e => {
+    if (!side.contains(e.target) && !btn.contains(e.target)) {
+      side.classList.remove('open');
+    }
+  });
+}
+
+/* ── Active anchor on scroll ──────────────────────────────────── */
+function initScrollSpy() {
+  const headings = document.querySelectorAll('h2[id], h3[id]');
+  if (!headings.length) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      document.querySelectorAll('.nav-item').forEach(a => a.classList.remove('active'));
+      const link = document.querySelector(`.nav-item[href$="#${entry.target.id}"]`);
+      if (link) link.classList.add('active');
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  headings.forEach(h => observer.observe(h));
+}
+
+/* ── Helpers ──────────────────────────────────────────────────── */
+function slugify(str) {
+  return str.replace(/[^a-zA-Z0-9가-힣]/g, '-');
+}
+
+/* ── Image path overrides (admin) ─────────────────────────────── */
+const IMG_OVERRIDE_KEY = 'pms-img-overrides';
+
+/* 관리자 비밀 문구: 라이트박스가 열린 상태에서 이 단어를 그대로 타이핑하면
+   이미지 경로 수정 창이 열립니다. 값만 바꾸면 비밀 문구가 변경됩니다. */
+const ADMIN_PASS = 'pms';
+
+function loadOverrides() {
+  try { return JSON.parse(localStorage.getItem(IMG_OVERRIDE_KEY)) || {}; }
+  catch { return {}; }
+}
+
+function saveOverrides(map) {
+  localStorage.setItem(IMG_OVERRIDE_KEY, JSON.stringify(map));
+}
+
+/* 원본 src 기록 + 저장된 변경분 적용 */
+function applyImgOverrides() {
+  const map = loadOverrides();
+  document.querySelectorAll('#content img').forEach(img => {
+    if (!img.dataset.origSrc) img.dataset.origSrc = img.getAttribute('src') || '';
+    const o = map[img.dataset.origSrc];
+    if (o) img.src = o;
+  });
+}
+
+/* ── Lightbox ─────────────────────────────────────────────────── */
+function initLightbox() {
+  const box = document.createElement('div');
+  box.id = 'lightbox';
+  box.innerHTML = `
+    <button id="lightbox-close" aria-label="닫기">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+    <div id="lightbox-guide">🔍 휠: 확대/축소 &nbsp;·&nbsp; 더블클릭: 2.5배 확대 &nbsp;·&nbsp; 드래그: 이동 &nbsp;·&nbsp; ESC: 닫기</div>
+  `;
+  document.body.appendChild(box);
+
+  const img = box.querySelector('#lightbox-img');
+  const guide = box.querySelector('#lightbox-guide');
+
+  /* 현재 라이트박스에 띄운 본문 이미지 요소 */
+  let triggerImg = null;
+
+  let scale = 1, tx = 0, ty = 0;
+  let dragging = false, dragX = 0, dragY = 0;
+  let guideTimer = null;
+  /* 관리자 비밀 문구 입력 버퍼 (라이트박스 열린 동안 타이핑 추적) */
+  let passBuffer = '';
+  /* 모바일 뒤로가기로 닫기 위해 추가한 history 항목이 있는지 추적 */
+  let pushedState = false;
+
+  function applyTransform() {
+    img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    img.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+  }
+
+  function resetTransform() {
+    scale = 1; tx = 0; ty = 0;
+    applyTransform();
+  }
+
+  function open(src, alt) {
+    img.src = src;
+    img.alt = alt || '';
+    passBuffer = '';
+    resetTransform();
+    box.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    guide.classList.add('visible');
+    clearTimeout(guideTimer);
+    guideTimer = setTimeout(() => guide.classList.remove('visible'), 2500);
+    /* 모바일 뒤로가기로 닫을 수 있도록 가짜 history 항목을 추가 */
+    if (!pushedState) {
+      history.pushState({ lightbox: true }, '');
+      pushedState = true;
+    }
+  }
+
+  /* fromPop: popstate(뒤로가기)로 호출된 경우 true → history.back() 재호출 안 함 */
+  function close(fromPop) {
+    box.classList.remove('open');
+    document.body.style.overflow = '';
+    img.src = '';
+    passBuffer = '';
+    resetTransform();
+    /* X·ESC·배경클릭으로 닫은 경우엔 추가했던 history 항목을 직접 정리 */
+    if (pushedState) {
+      pushedState = false;
+      if (!fromPop) history.back();
+    }
+  }
+
+  /* 휠 줌 — 커서 위치 기준 */
+  box.addEventListener('wheel', e => {
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.15 : 1 / 1.15;
+    const newScale = Math.min(Math.max(scale * factor, 1), 6);
+    const rect = img.getBoundingClientRect();
+    const dx = e.clientX - (rect.left + rect.width / 2);
+    const dy = e.clientY - (rect.top + rect.height / 2);
+    tx += dx * (1 - newScale / scale);
+    ty += dy * (1 - newScale / scale);
+    scale = newScale;
+    if (scale <= 1) { scale = 1; tx = 0; ty = 0; }
+    applyTransform();
+  }, { passive: false });
+
+  /* 더블클릭 — 클릭 지점 2.5배 / 원복 */
+  img.addEventListener('dblclick', e => {
+    e.stopPropagation();
+    if (scale > 1) {
+      scale = 1; tx = 0; ty = 0;
+    } else {
+      const rect = img.getBoundingClientRect();
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
+      const newScale = 2.5;
+      tx += dx * (1 - newScale / scale);
+      ty += dy * (1 - newScale / scale);
+      scale = newScale;
+    }
+    applyTransform();
+  });
+
+  /* 드래그 패닝 */
+  img.addEventListener('mousedown', e => {
+    if (scale <= 1) return;
+    e.preventDefault();
+    dragging = true;
+    dragX = e.clientX - tx;
+    dragY = e.clientY - ty;
+    img.style.cursor = 'grabbing';
+  });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    tx = e.clientX - dragX;
+    ty = e.clientY - dragY;
+    img.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+  });
+  document.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    img.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
+  });
+
+  const content = document.querySelector('#content');
+  if (content) {
+    content.addEventListener('click', e => {
+      if (e.target.tagName === 'IMG') {
+        e.stopPropagation();
+        triggerImg = e.target;
+        open(e.target.src, e.target.alt);
+      }
+    });
+  }
+
+  box.addEventListener('click', e => { if (e.target === box) close(); });
+  box.querySelector('#lightbox-close').addEventListener('click', () => close());
+
+  /* 뒤로가기(모바일 포함) → 페이지 이동 대신 라이트박스를 닫는다 */
+  window.addEventListener('popstate', () => {
+    if (box.classList.contains('open')) close(true);
+  });
+
+  /* ── 관리자 전용 이미지 경로 편집기 ──────────────────────────── */
+  const editor = document.createElement('div');
+  editor.id = 'img-editor';
+  editor.innerHTML = `
+    <div class="ie-panel" role="dialog" aria-modal="true" aria-label="이미지 경로 수정">
+      <h3>이미지 경로 수정 <span class="ie-admin">관리자</span></h3>
+      <label for="ie-input">이미지 URL / 경로</label>
+      <textarea id="ie-input" rows="3" spellcheck="false"></textarea>
+      <div class="ie-preview-wrap"><img id="ie-preview" alt="미리보기"></div>
+      <div class="ie-actions">
+        <button type="button" id="ie-copy" class="ie-btn ie-ghost">&lt;img&gt; 코드 복사</button>
+        <button type="button" id="ie-reset" class="ie-btn ie-ghost">원본 복원</button>
+        <span class="ie-spacer"></span>
+        <button type="button" id="ie-cancel" class="ie-btn ie-ghost">취소</button>
+        <button type="button" id="ie-save" class="ie-btn ie-primary">적용</button>
+      </div>
+      <p class="ie-note">변경 사항은 이 브라우저에 저장됩니다. 영구 반영하려면 「&lt;img&gt; 코드 복사」로 HTML 소스의 src를 교체하세요.</p>
+    </div>
+  `;
+  document.body.appendChild(editor);
+
+  const ieInput   = editor.querySelector('#ie-input');
+  const iePreview = editor.querySelector('#ie-preview');
+
+  function openEditor() {
+    if (!triggerImg) return;
+    ieInput.value = triggerImg.getAttribute('src') || '';
+    iePreview.src = ieInput.value;
+    editor.classList.add('open');
+    ieInput.focus();
+    ieInput.select();
+  }
+
+  function closeEditor() { editor.classList.remove('open'); }
+
+  ieInput.addEventListener('input', () => { iePreview.src = ieInput.value.trim(); });
+
+  editor.querySelector('#ie-save').addEventListener('click', () => {
+    if (!triggerImg) return;
+    const newSrc = ieInput.value.trim();
+    if (!newSrc) return;
+    const orig = triggerImg.dataset.origSrc || triggerImg.getAttribute('src');
+    const map = loadOverrides();
+    map[orig] = newSrc;
+    saveOverrides(map);
+    triggerImg.src = newSrc;
+    img.src = newSrc;
+    closeEditor();
+  });
+
+  editor.querySelector('#ie-reset').addEventListener('click', () => {
+    if (!triggerImg) return;
+    const orig = triggerImg.dataset.origSrc || triggerImg.getAttribute('src');
+    const map = loadOverrides();
+    delete map[orig];
+    saveOverrides(map);
+    triggerImg.src = orig;
+    img.src = orig;
+    ieInput.value = orig;
+    iePreview.src = orig;
+  });
+
+  editor.querySelector('#ie-copy').addEventListener('click', async () => {
+    const src = ieInput.value.trim();
+    const alt = (triggerImg && triggerImg.alt) || '';
+    const snippet = `<img src="${src}" alt="${alt}" style="width:100%;border-radius:8px;border:1px solid #d0d5dd;margin:16px 0;">`;
+    try {
+      await navigator.clipboard.writeText(snippet);
+      const b = editor.querySelector('#ie-copy');
+      const t = b.textContent;
+      b.textContent = '복사됨 ✓';
+      setTimeout(() => { b.textContent = t; }, 1500);
+    } catch {
+      window.prompt('복사할 코드:', snippet);
+    }
+  });
+
+  editor.querySelector('#ie-cancel').addEventListener('click', closeEditor);
+  editor.addEventListener('click', e => { if (e.target === editor) closeEditor(); });
+
+  document.addEventListener('keydown', e => {
+    if (editor.classList.contains('open')) {
+      if (e.key === 'Escape') { e.stopPropagation(); closeEditor(); }
+      return;
+    }
+    if (box.classList.contains('open')) {
+      if (e.key === 'Escape') { close(); return; }
+      /* 한 글자 키만 버퍼에 누적 → 비밀 문구와 끝부분이 일치하면 열기 */
+      if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        passBuffer = (passBuffer + e.key).toLowerCase().slice(-ADMIN_PASS.length);
+        if (passBuffer === ADMIN_PASS.toLowerCase()) {
+          passBuffer = '';
+          openEditor();
+        }
+      }
+      return;
+    }
+    if (e.key === 'Escape') close();
+  });
+}
+
+/* ── Init ─────────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  buildNav('nav-list');
+  initRoleFilter();
+  initSearch('nav-search', 'nav-list');
+  initHamburger('hamburger', 'sidebar');
+  initScrollSpy();
+  applyImgOverrides();
+  initLightbox();
+});
