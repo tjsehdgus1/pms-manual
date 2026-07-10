@@ -137,7 +137,17 @@ index.html          # 전체 목차
 css/style.css       # 공통 스타일
 js/main.js          # 사이드바 네비게이션 (NAV 배열로 메뉴 관리)
 sections/           # 섹션별 HTML
+scripts/build-user-manual.js  # 사용자용(관리자 섹션 제외) 배포본 생성 스크립트
+dist-user/           # 위 스크립트로 생성되는 사용자 전용 매뉴얼 (외부 서버 배포용)
 ```
+
+## 사용자용(외부 배포) 매뉴얼
+
+관리자 태그가 붙은 섹션을 뺀 "사용자용" 정적 사본을 `dist-user/`에 만들어 별도 서버에 그대로 올릴 수 있다.
+
+- 생성/재생성: `node scripts/build-user-manual.js`
+- 섹션을 추가·삭제하거나 `role`을 바꾸면, `scripts/build-user-manual.js` 안의 `SECTIONS` 목록도 함께 갱신한 뒤 다시 실행해야 한다 (이 목록은 `print.html`의 `SECTIONS`와 동일하게 유지)
+- 매뉴얼 콘텐츠를 커밋할 때는 `dist-user/`도 재생성해서 같이 커밋한다
 
 ## 섹션 추가 시 체크리스트
 
