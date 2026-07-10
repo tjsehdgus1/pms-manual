@@ -1,8 +1,8 @@
 /* 매뉴얼 헤더 메타 (버전 + PMS 바로가기)
  * ───────────────────────────────────────────────
  * ▼▼▼ 기능이 수정·변경되면 아래 버전/날짜만 고치세요 ▼▼▼ */
-const MANUAL_VERSION = '0.1';
-const MANUAL_DATE    = '2026.07.02';
+const MANUAL_VERSION = '0.2';
+const MANUAL_DATE    = '2026.07.10';
 /* ▲▲▲ 여기만 수정 ▲▲▲ */
 
 const PMS_URL = 'https://pms.jntp.or.kr/';
